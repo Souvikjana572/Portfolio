@@ -7,6 +7,6 @@ h1 , h2 {
 }
 @layer utilities{
     .gradient{
-        background: linear-gradient(-45deg, #55bee7, #fd1d1d, #fcb045);
+        background: linear-gradient(-45deg, #55bee7, #85d4ce, #fcb045);
     }
 }
