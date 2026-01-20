@@ -1,5 +1,19 @@
+import { useMemo } from "react"
 import Particlesbackground from "../components/Particlesbackground" 
+import {motion } from "framer-motion"
+import React from "react"
 export default function Home(){
+    const role=useMemo(()=>["Web Developer ","SoftwareDeveloper"],[])
+    const [index,setIndex]=React.useState(0);
+    const [subIndex,setSubIndex]=React.useState(0);
+    const [deleting,setDeleting]=React.useState(false);
+    React.useEffect(()=>{
+        const current=role[index];
+        const timeout=setTimeout(()=>{
+             
+        })
+    })
+        
     return (
         <section id="home" className="w-full h-screen relative bg-black overflow-hidden">
            <Particlesbackground/>
@@ -30,8 +44,12 @@ export default function Home(){
             </div>
            </div>
 
-           <div className="relative z-10 h-full max-w-7xl mx-auto px-4 grid grid-cols-1 lg-grid-cols-2 ">
-
+           <div className="relative z-10 h-full w-full max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 ">
+                    <div className="flex flex-col justify-centre h-full text-center lg:text-left relative">
+                        <div className="w-full lg:pr-24 mx-auto max-w-[48rem]">
+<motion.div>
+                        </div>
+</div>
            </div>
         </section>
     )
