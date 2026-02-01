@@ -3,17 +3,17 @@ import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import avatar from "../assets/avator.png";
 import resumePdf from "../assets/Resume.pdf";
-import { FaXTwitter, FaLinkedinIn, FaGithub } from "react-icons/fa6";
-import { SiCodeforces, SiCodechef, SiLeetcode } from "react-icons/si";
+import { FaGithub } from "react-icons/fa6";
+import { SiCodeforces, SiCodechef, SiLeetcode, SiGeeksforgeeks, SiChessdotcom } from "react-icons/si";
 import ParticleBackground from "../components/Particlesbackground";
 
 const socials = [
-  { Icon: FaXTwitter, label: "X", href: "https://x.com/Souvikjana007" },
-  { Icon: FaLinkedinIn, label: "LinkedIn", href: "https://www.linkedin.com/in/souvik-jana-22915a1bb/" },
   { Icon: FaGithub, label: "GitHub", href: "https://github.com/Souvikjana572" },
   { Icon: SiCodeforces, label: "Codeforces", href: "https://codeforces.com/profile/souvik_jana_" },
   { Icon: SiCodechef, label: "CodeChef", href: "https://www.codechef.com/users/sjana" },
   { Icon: SiLeetcode, label: "LeetCode", href: "https://leetcode.com/u/souvikjana/" },
+  { Icon: SiGeeksforgeeks, label: "GeeksforGeeks", href: "https://www.geeksforgeeks.org/profile/souvikjanaboss" },
+  { Icon: SiChessdotcom, label: "Chess.com", href: "https://www.chess.com/member/souvik_jana" },
 ];
 
 
