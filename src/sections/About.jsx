@@ -50,7 +50,7 @@ export default function About() {
             </p>
 
             <p className="mt-4 text-gray-300 leading-relaxed text-base sm:text-lg max-w-2xl md:max-w-3xl">
-            I’m a Computer Science undergraduate passionate about software development, problem-solving, and scalable systems. I enjoy building real-world applications and writing clean, efficient code.
+            I’m a final year Computer Science undergraduate passionate about software development, problem-solving, and scalable systems. I enjoy building real-world applications and writing clean, efficient code.
 
 I have experience in data structures & algorithms, full-stack development, and cloud technologies, and have solved hundreds of DSA problems across platforms. I’ve built projects using React, Node.js, MongoDB, and worked with AWS during my internship at Amazon, gaining exposure to production-level systems and engineering best practices.
 
