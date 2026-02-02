@@ -136,15 +136,15 @@ export default function Contact() {
               )}
             </div>
 
-            {/* Email field */}
+            {/* Email / Phone field */}
             <div className="flex flex-col">
               <label className="mb-1">
-                Email <span className="text-red-500">*</span>
+                Email or Phone <span className="text-red-500">*</span>
               </label>
               <input
-                type="email"
+                type="text"
                 name="email"
-                placeholder="Your Email"
+                placeholder="Your email or phone number"
                 value={formData.email}
                 onChange={handleChange}
                 className={`p-3 rounded-md bg-white/10 border ${
