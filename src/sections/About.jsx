@@ -37,12 +37,15 @@ export default function About() {
           {/* Avatar / Card */}
           <motion.div
             className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-xl border border-blue-400/40 group"
-            whileHover={{ scale: 1.05 }}
+             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 200, damping: 18 }}
             aria-hidden="true"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <img src={p} alt="Souvik Jana" className="relative z-10 w-full h-full object-cover" />
+            <div className="absolute inset-0 " />
+            <img 
+              src={p} 
+              alt="Souvik Jana" 
+            />
           </motion.div>
 
           {/* Name + Role + Bio + CTAs */}
