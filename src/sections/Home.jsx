@@ -23,7 +23,7 @@ const glowVariants = {
     scale: 1.2,
     y: -3,
     filter:
-      "drop-shadow(0 0 8px rgba(13,88,204,0.9)) drop-shadow(0 0 18px rgba(16,185,129,0.8))",
+      "drop-shadow(0 0 8px rgba(59,130,246,0.8)) drop-shadow(0 0 18px rgba(168,85,247,0.7))",
     transition: { type: "spring", stiffness: 300, damping: 15 },
   },
   tap: {
@@ -68,25 +68,25 @@ const Home = React.forwardRef((props, ref) => {
 
       {/* gradient blobs */}
       <div className="absolute inset-0">
-        <div
+        <motion.div
           className="absolute -top-32 -left-32 
           w-[70vw] sm:w-[50vw] md:w-[40vw] 
           h-[70vw] sm:h-[50vw] md:h-[40vw]
           max-w-[500px] max-h-[500px]
           rounded-full
-          bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1CD8D2]
-          opacity-30 sm:opacity-20 md:opacity-10 
+          bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-blue-500/20
+          opacity-40 sm:opacity-30 md:opacity-20
           blur-[100px] sm:blur-[130px] md:blur-[150px]
           animate-pulse"
         />
-        <div
+        <motion.div
           className="absolute bottom-0 right-0 
           w-[70vw] sm:w-[50vw] md:w-[40vw] 
           h-[70vw] sm:h-[50vw] md:h-[40vw] 
           max-w-[500px] max-h-[500px] 
           rounded-full 
-          bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63] 
-          opacity-40 sm:opacity-30 
+          bg-gradient-to-r from-purple-500/30 via-blue-500/30 to-purple-500/20
+          opacity-50 sm:opacity-40 md:opacity-30
           blur-[100px] sm:blur-[130px] md:blur-[150px] 
           animate-pulse delay-500"
         />
@@ -118,7 +118,7 @@ const Home = React.forwardRef((props, ref) => {
             {/* name */}
             <motion.h1
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text 
-              bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63] drop-shadow-lg"
+              bg-gradient-to-r from-blue-300 via-purple-300 to-blue-300 drop-shadow-lg"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 1 }}
@@ -148,31 +148,27 @@ const Home = React.forwardRef((props, ref) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.1, duration: 0.8 }}
             >
-              <a
+              <motion.a
                 href="#projects"
-                className="px-6 py-3 rounded-full text-lg font-medium text-white 
-                bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63]
-                shadow-lg hover:scale-105 transition-all"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 py-3 rounded-full text-lg font-semibold text-white 
+                bg-gradient-to-r from-blue-500 to-purple-500
+                shadow-lg hover:shadow-xl transition-all"
               >
                 View My Work
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href={resumePdf}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 rounded-full text-lg font-medium text-black bg-white 
-                hover:bg-gray-200 shadow-lg hover:scale-105 transition-all"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 py-3 rounded-full text-lg font-semibold text-black bg-white 
+                hover:bg-gray-100 shadow-lg hover:shadow-xl transition-all"
               >
                 View Resume
-              </a>
-              {/* <a
-                href={resumePdf}
-                download="Souvik_Jana_Resume.pdf"
-                className="px-6 py-3 rounded-full text-lg font-medium text-white border-2 border-white 
-                hover:bg-white hover:text-black shadow-lg hover:scale-105 transition-all"
-              >
-                Download Resume
-              </a> */}
+              </motion.a>
             </motion.div>
 
             {/* socials */}
@@ -217,9 +213,9 @@ const Home = React.forwardRef((props, ref) => {
               height: "min(40vw, 760px)",
               borderRadius: "50%",
               filter: "blur(38px)",
-              opacity: 0.32,
+              opacity: 0.35,
               background:
-                "conic-gradient(from 0deg, #1CD8D2, #00bf8f, #302b63, #1CD8D2)",
+                "conic-gradient(from 0deg, #3b82f6, #a855f7, #3b82f6)",
             }}
           />
           <motion.img

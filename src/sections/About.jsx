@@ -9,11 +9,19 @@ export default function About() {
       aria-label="About me"
     >
       {/* Layered neon background accents */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-10 -left-10 w-[360px] h-[360px] rounded-full bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1CD8D2] opacity-20 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-0 right-10 w-[420px] h-[420px] rounded-full bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63] opacity-15 blur-[140px] animate-pulse delay-300" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-20 w-[220px] h-[220px] rounded-full bg-gradient-to-r from-[#00bf8f] to-[#1CD8D2] opacity-10 blur-[100px]" />
-      </div>
+      <motion.div className="absolute inset-0 pointer-events-none">
+        <motion.div 
+          className="absolute -top-10 -left-10 w-[360px] h-[360px] rounded-full bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-blue-400/20 opacity-25 blur-[120px] animate-pulse"
+          animate={{ y: [0, 30, 0], x: [0, 20, 0] }}
+          transition={{ duration: 10, repeat: Infinity }}
+        />
+        <motion.div 
+          className="absolute bottom-0 right-10 w-[420px] h-[420px] rounded-full bg-gradient-to-r from-purple-500/30 via-blue-500/30 to-purple-400/20 opacity-20 blur-[140px] animate-pulse delay-300"
+          animate={{ y: [0, -30, 0], x: [0, -20, 0] }}
+          transition={{ duration: 12, repeat: Infinity }}
+        />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-20 w-[220px] h-[220px] rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-15 blur-[100px]" />
+      </motion.div>
 
       {/* Content container */}
       <div className="relative z-10 max-w-6xl w-full mx-auto px-6 md:px-10 lg:px-12 py-20 flex flex-col gap-12">
@@ -28,21 +36,18 @@ export default function About() {
         >
           {/* Avatar / Card */}
           <motion.div
-            className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#1CD8D2]/20 to-[#302b63]/20 border border-[#1CD8D2]/25"
-            whileHover={{ scale: 1.02 }}
+            className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-xl border border-blue-400/40 group"
+            whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 200, damping: 18 }}
             aria-hidden="true"
           >
-            {/* Replace with your actual avatar image */}
-            
-            <div className="absolute inset-0 " />
-           
-            <img src={p} alt="test" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <img src={p} alt="Souvik Jana" className="relative z-10 w-full h-full object-cover" />
           </motion.div>
 
           {/* Name + Role + Bio + CTAs */}
           <div className="flex-1 flex flex-col justify-center text-center md:text-left">
-            <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63]">
+            <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-blue-300">
               Souvik Jana
             </h2>
             <p className="mt-2 text-lg sm:text-xl text-white/90 font-semibold">
@@ -65,14 +70,14 @@ I’m continuously learning and exploring machine learning, system design, and b
               ].map((item, i) => (
                 <motion.div
                   key={i}
-                  className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-center"
+                  className="rounded-xl border border-blue-400/30 bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-xl px-4 py-3 text-center hover:border-blue-400/60 hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-500/20 transition-all duration-300"
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.05 * i }}
                   viewport={{ once: true, amount: 0.3 }}
                 >
-                  <div className="text-sm text-gray-400">{item.label}</div>
-                  <div className="text-base font-semibold text-white">
+                  <div className="text-sm text-blue-300 font-medium">{item.label}</div>
+                  <div className="text-base font-semibold text-white mt-1">
                     {item.value}
                   </div>
                 </motion.div>
@@ -81,20 +86,24 @@ I’m continuously learning and exploring machine learning, system design, and b
 
             {/* CTAs */}
             <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
-              <a
+              <motion.a
                 href="#projects"
-                className="inline-flex items-center justify-center rounded-lg bg-white text-black font-semibold px-5 py-3 hover:bg-gray-200 transition"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold px-6 py-3 shadow-lg hover:shadow-xl transition-all"
                 aria-label="View my projects"
               >
                 View Projects
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href="#contact"
-                className="inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/10 text-white px-5 py-3 hover:bg-white/20 transition"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center justify-center rounded-lg border border-blue-400/50 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-md text-white px-6 py-3 hover:border-blue-400 hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 transition-all"
                 aria-label="Get in touch"
               >
                 Get in Touch
-              </a>
+              </motion.a>
             </div>
           </div>
         </motion.div>

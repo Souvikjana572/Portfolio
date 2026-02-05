@@ -141,60 +141,60 @@ useEffect(()=> {
   return(
     <section id="skills" 
     ref={sectionRef}
-    className="h-1/2 w-full pb-8 flex flex-col items-center justify-center relative bg-black text-white overflow-hidden">
-      <div className='absolute inset-0 pointer-events-none'>
-<div className='absolute top-1/4 left-0 w-[300px] h-[300px] rounded-full bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1cd8d2]
-opacity-20 blur-[120px] animate-pulse
-'/>
-<div className='absolute bottom-1/4 right-0 w-[300px] h-[300px] rounded-full bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1cd8d2]
-opacity-20 blur-[120px] animate-pulse delay-500
-' />
+    className="relative w-full py-20 flex flex-col items-center justify-center bg-black text-white overflow-hidden">
+      {/* Animated background elements */}
+      <motion.div
+        className="absolute top-0 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl opacity-20"
+        animate={{ y: [0, 30, 0], x: [0, 20, 0] }}
+        transition={{ duration: 8, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute top-40 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl opacity-20"
+        animate={{ y: [0, -30, 0], x: [0, -20, 0] }}
+        transition={{ duration: 10, repeat: Infinity }}
+      />
 
+      <div className='relative z-10'>
+        <motion.h2 className='text-4xl mt-5 sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-blue-300 z-10 text-center'
+        initial={{opacity:0 , y: -30}}
+        whileInView={{opacity:1 , y:0}}
+        transition={{duration:0.5 , delay:0.1 }}
+        >
+          My Skills
+        </motion.h2>
+        <motion.p className='mt-2 mb-12 text-gray-300 text-base sm:text-lg z-10 text-center'
+        initial={{opacity:0 , y: -10}}
+        whileInView={{opacity:1 , y:0}}
+        transition={{duration:0.5 , delay:0.1 }}
+        >
+          Crafted with modern technologies and best practices
+        </motion.p>
       </div>
 
-      <motion.h2 className='text-4xl mt-5 sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] z-10'
-      initial={{opacity:0 , y: -30}}
-      whileInView={{opacity:1 , y:0}}
-      transition={{duration:0.5 , delay:0.1 }}
-      >
-        My Skills
-      </motion.h2>
-      <motion.p className='mt-2 mb-8 text-white/90 text-base sm:text-lg z-10'
-      initial={{opacity:0 , y: -10}}
-      whileInView={{opacity:1 , y:0}}
-      transition={{duration:0.5 , delay:0.1 }}
-      
-      >
-Modern Applications | Modern Technologies
-      </motion.p>
-
-<div  className='relative w-full overflow-hidden'>
-<motion.div 
-ref={trackRef}
-className='flex gap-10 text-6xl text-[#1cd8d2]'
-style={{x, whiteSpace: "nowrap" , willChange: "transform"}}
->
-
-{repeated.map((s,i) => (
-  <div 
-  key={i} className='flex flex-col items-center gap-2 min-w-[120px]'
-  aria-label = {s.name}
-  title = {s.name}
-  >
-<span className='hover:scale-125 transition-transform duration-300'>
-{s.icon}
-</span>
-<p className='text-sm'>
-  {s.name}
-</p>
-  </div>
-))}
-</motion.div>
-
-
-</div>
-
-
+      <div  className='relative w-full overflow-hidden px-6'>
+        <motion.div 
+          ref={trackRef}
+          className='flex gap-10 text-5xl'
+          style={{x, whiteSpace: "nowrap" , willChange: "transform"}}
+        >
+          {repeated.map((s,i) => (
+            <motion.div 
+              key={i} 
+              className='flex flex-col items-center gap-3 min-w-[140px] p-4 rounded-xl border border-blue-400/30 bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-md hover:border-blue-400/60 hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-500/20 transition-all duration-300 group'
+              aria-label={s.name}
+              title={s.name}
+              whileHover={{ scale: 1.05, y: -5 }}
+            >
+              <span className='text-blue-300 group-hover:text-blue-200 transition-colors duration-300'>
+                {s.icon}
+              </span>
+              <p className='text-sm text-gray-300 group-hover:text-white transition-colors duration-300 font-medium text-center'>
+                {s.name}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
     </section>
   )
 }

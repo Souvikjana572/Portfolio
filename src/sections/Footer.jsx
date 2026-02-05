@@ -35,7 +35,7 @@ const glowVariants = {
     scale: 1.2,
     y: -3,
     filter:
-      "drop-shadow(0 0 8px rgba(13,88,204,0.9)) drop-shadow(0 0 18px rgba(16,185,129,0.8))",
+      "drop-shadow(0 0 8px rgba(59,130,246,0.8)) drop-shadow(0 0 18px rgba(168,85,247,0.7))",
     transition: { type: "spring", stiffness: 300, damping: 15 },
   },
   tap: { scale: 0.95, y: 0, transition: { duration: 0.08 } },
@@ -46,9 +46,9 @@ const Footer = () => {
     <footer className="relative overflow-hidden bg-black">
       {/* --- Background neon gradient effects --- */}
       {/* Blue glow overlay (top-right side) */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_60%_at_70%_35%,rgba(13,88,204,0.35),transparent_70%)]" />
-      {/* Green glow overlay (bottom-left side) */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_55%_at_30%_70%,rgba(16,185,129,0.30),transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_60%_at_70%_35%,rgba(59,130,246,0.3),transparent_70%)]" />
+      {/* Purple glow overlay (bottom-left side) */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_55%_at_30%_70%,rgba(168,85,247,0.25),transparent_70%)]" />
 
       {/* --- Main Footer Content --- */}
       <motion.div
@@ -78,7 +78,7 @@ const Footer = () => {
 
         {/* --- Accent underline --- */}
         {/* Decorative gradient line under name */}
-        <div className="h-[3px] w-24 md:w-32 rounded-full bg-gradient-to-r from-[#0D58CC] via-cyan-300 to-emerald-400" />
+        <div className="h-[3px] w-24 md:w-32 rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400" />
 
         {/* --- Social Media Links --- */}
         {/* Icons mapped dynamically from `socials` array */}

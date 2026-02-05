@@ -74,10 +74,20 @@ export default function Contact() {
   return (
     <section
       id="contact" className="w-full min-h-screen relative bg-black overflow-hidden text-white py-20 px-6 md:px-20 flex flex-col md:flex-row items-center gap-10">
+      {/* Animated background elements */}
+      <motion.div
+        className="absolute top-0 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl opacity-20"
+        animate={{ y: [0, 40, 0], x: [0, 20, 0] }}
+        transition={{ duration: 10, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl opacity-20"
+        animate={{ y: [0, -40, 0], x: [0, -20, 0] }}
+        transition={{ duration: 12, repeat: Infinity }}
+      />
+      
       {/* Particles Background */}
       <ParticleBackground />
-
-  
 
       {/* Contact Section Content */}
       <div className="relative z-10 w-full flex flex-col md:flex-row items-center gap-10">
@@ -102,9 +112,9 @@ export default function Contact() {
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-full md:w-1/2 bg-white/5 p-8 rounded-2xl shadow-lg border border-white/10"
+          className="w-full md:w-1/2 bg-gradient-to-br from-gray-900/80 to-gray-950/80 backdrop-blur-xl p-8 rounded-2xl shadow-lg border border-blue-400/30 hover:border-blue-400/50 transition-all duration-300"
         >
-          <h2 className="text-3xl font-bold mb-6">Let’s Get in Touch</h2>
+          <h2 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-purple-300">Let's Get in Touch</h2>
           <p className="text-gray-400 text-sm mb-6">
             Or reach me directly:{" "}
             <a
@@ -115,11 +125,11 @@ export default function Contact() {
             </a>
           </p>
 
-          <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+          <form className="flex flex-col gap-5 mt-6" onSubmit={handleSubmit}>
             {/* Name field */}
             <div className="flex flex-col">
-              <label className="mb-1">
-                Name <span className="text-red-500">*</span>
+              <label className="mb-2 text-sm font-medium text-gray-300">
+                Name <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
@@ -127,19 +137,19 @@ export default function Contact() {
                 placeholder="Your Name"
                 value={formData.name}
                 onChange={handleChange}
-                className={`p-3 rounded-md bg-white/10 border ${
-                  errors.name ? "border-red-500" : "border-gray-500"
-                } text-white focus:outline-none focus:border-blue-500`}
+                className={`p-3 rounded-lg bg-gray-800/50 backdrop-blur border ${
+                  errors.name ? "border-red-500" : "border-blue-400/30"
+                } text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 focus:bg-gray-800/80 transition-all duration-200`}
               />
               {errors.name && (
-                <p className="text-red-500 text-xs">{errors.name}</p>
+                <p className="text-red-400 text-xs mt-1">{errors.name}</p>
               )}
             </div>
 
             {/* Email / Phone field */}
             <div className="flex flex-col">
-              <label className="mb-1">
-                Email or Phone <span className="text-red-500">*</span>
+              <label className="mb-2 text-sm font-medium text-gray-300">
+                Email or Phone <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
@@ -147,19 +157,19 @@ export default function Contact() {
                 placeholder="Your email or phone number"
                 value={formData.email}
                 onChange={handleChange}
-                className={`p-3 rounded-md bg-white/10 border ${
-                  errors.email ? "border-red-500" : "border-gray-500"
-                } text-white focus:outline-none focus:border-blue-500`}
+                className={`p-3 rounded-lg bg-gray-800/50 backdrop-blur border ${
+                  errors.email ? "border-red-500" : "border-blue-400/30"
+                } text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 focus:bg-gray-800/80 transition-all duration-200`}
               />
               {errors.email && (
-                <p className="text-red-500 text-xs">{errors.email}</p>
+                <p className="text-red-400 text-xs mt-1">{errors.email}</p>
               )}
             </div>
 
             {/* Message textarea */}
             <div className="flex flex-col">
-              <label className="mb-1">
-                Message <span className="text-red-500">*</span>
+              <label className="mb-2 text-sm font-medium text-gray-300">
+                Message <span className="text-red-400">*</span>
               </label>
 
               <textarea
@@ -168,25 +178,27 @@ export default function Contact() {
                 placeholder="Your message..."
                 value={formData.message}
                 onChange={handleChange}
-                className={`p-3 rounded-md bg-white/10 border ${
-                  errors.message ? "border-red-500" : "border-gray-500"
-                } text-white focus:outline-none focus:border-blue-500 resize-none`}
+                className={`p-3 rounded-lg bg-gray-800/50 backdrop-blur border ${
+                  errors.message ? "border-red-500" : "border-blue-400/30"
+                } text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 focus:bg-gray-800/80 transition-all duration-200 resize-none`}
               />
 
               {errors.message && (
-                <p className="text-red-500 text-xs">{errors.message}</p>
+                <p className="text-red-400 text-xs mt-1">{errors.message}</p>
               )}
             </div>
 
             {/* Status message */}
             {status && (
-              <p
+              <motion.p
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
                 className={`text-sm ${
                   status === "success"
                     ? "text-green-400"
                     : status === "error"
                     ? "text-red-400"
-                    : "text-yellow-400"
+                    : "text-blue-400"
                 }`}
               >
                 {status === "sending"
@@ -194,25 +206,16 @@ export default function Contact() {
                   : status === "success"
                   ? "Message sent successfully ✅"
                   : "Something went wrong ❌"}
-              </p>
+              </motion.p>
             )}
 
             {/* Submit button */}
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               disabled={status === "sending"}
               type="submit"
-              className="
-                bg-blue-600 
-                hover:bg-blue-700 
-                disabled:opacity-60 
-                text-white 
-                py-3 
-                rounded-md 
-                font-semibold 
-                transition
-              "
+              className="mt-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 disabled:opacity-60 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
             >
               {status === "sending" ? "Sending..." : "Send Message"}
             </motion.button>
