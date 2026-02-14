@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import p from "../assets/Souvik1.jpg";
+import ParticleBackground from "../components/Particlesbackground";
+import CodingProfiles from "../components/CodingProfiles";
 
 export default function About() {
   return (
@@ -8,6 +10,7 @@ export default function About() {
       className="min-h-screen w-full flex items-center justify-center relative bg-black text-white overflow-hidden"
       aria-label="About me"
     >
+      <ParticleBackground />
       {/* Layered neon background accents */}
       <motion.div className="absolute inset-0 pointer-events-none">
         <motion.div 
@@ -67,7 +70,7 @@ I’m continuously learning and exploring machine learning, system design, and b
             {/* Quick stats */}
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-xl">
               {[
-                { label: "Experience", value: "1+ years" },
+                { label: "Experience", value: "Fresher" },
                 { label: "Specialty", value: "Full Stack" },
                 { label: "Focus", value: "Software " },
               ].map((item, i) => (
@@ -111,26 +114,16 @@ I’m continuously learning and exploring machine learning, system design, and b
           </div>
         </motion.div>
 
-        {/* Body copy only — removed skills chip grid */}
-        <div className="grid md:grid-cols-1">
-          <motion.div
-            className="text-center md:text-left"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true, amount: 0.4 }}
-          >
-            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-              About Me
-            </h3>
-            <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
-             I’m a Software Developer, Competetive Programmer, and Web Developer — passionate about building fast, resilient applications and solving real world problems.
-            </p>
-            <p className="mt-4 text-gray-400 text-base sm:text-lg">
-              I love turning ideas into scalable, user‑friendly products that make an impact. 
-            </p>
-          </motion.div>
-        </div>
+        {/* Coding Profiles Section */}
+        <motion.div
+          className="w-full mt-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <CodingProfiles />
+        </motion.div>
       </div>
     </section>
   );

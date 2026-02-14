@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import OverlayMenu from "./OverlayMenu";
 import { FiMenu } from "react-icons/fi";
+import { motion } from "framer-motion";
 import Logo from "../assets/LOGO.png"; // Adjust path
 
 export default function Navbar() {
@@ -94,12 +95,14 @@ export default function Navbar() {
 
         {/* Contact Button */}
         <div className="hidden lg:block">
-          <a
+          <motion.a
             href="#contact"
-            className="bg-gradient-to-r from-pink-500 to-blue-500 text-white px-5 py-2 rounded-full font-medium shadow-lg hover:opacity-90 transition-opacity duration-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
           >
             Reach Out
-          </a>
+          </motion.a>
         </div>
       </nav>
 

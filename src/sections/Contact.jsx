@@ -96,7 +96,7 @@ export default function Contact() {
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-full md:w-1/2 flex justify-center"
+          className="hidden md:flex w-full md:w-1/2 justify-center"
         >
           <motion.img
             src={Astra}

@@ -2,6 +2,7 @@
 import React from "react";
 // Importing motion components and scroll hooks from Framer Motion for animations
 import { motion, useScroll, useTransform } from "framer-motion";
+import ParticleBackground from "../components/Particlesbackground";
 // Importing Amazon certificate
 import amazonCert from "../assets/Amazon.pdf";
 
@@ -163,6 +164,7 @@ const Experience = () => {
 
   return (
     <section id="experience" className="relative bg-black text-white overflow-hidden">
+      <ParticleBackground />
       {/* Animated background elements */}
       <motion.div
         style={{ y: bgY }}
@@ -174,7 +176,7 @@ const Experience = () => {
       />
 
       {/* Main container */}
-      <div ref={sceneRef} className="relative">
+      <div ref={sceneRef} className="relative z-10">
         {/* Section Header */}
         <div className="relative pt-20 md:pt-32 pb-20 md:pb-40">
           <div className="text-center mb-16 md:mb-24">
