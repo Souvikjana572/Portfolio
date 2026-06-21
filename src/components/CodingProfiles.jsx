@@ -64,11 +64,11 @@ const CodingProfiles = () => {
       badge: stats.codeforces?.rank || "Expert",
       stats: [
         { label: "Rating", value: stats.codeforces?.rating || "1600+", icon: "★" },
-        { label: "Problems Solved", value: stats.codeforces?.solved || "350+", icon: "✓" },
+        { label: "Problems Solved", value: stats.codeforces?.solved || "360+", icon: "✓" },
       ],
       details: [
         { label: "Max Rating", value: stats.codeforces?.maxRating || "1600+" },
-        { label: "Contests", value: stats.codeforces?.contests || "50+" },
+        { label: "Contests", value: stats.codeforces?.contests || "50+" },      
       ],
     },
     {
@@ -95,14 +95,14 @@ const CodingProfiles = () => {
       stats: [
         {
           label: "Global Ranking",
-          value: stats.leetcode?.globalRank ?? stats.leetcode?.ranking ?? "22k",
+          value: stats.leetcode?.globalRank ?? stats.leetcode?.ranking ?? "18k",
           icon: "★",
         },
         { label: "Problems Solved", value: stats.leetcode?.solved || "1100+", icon: "✓" },
       ],
       details: [
         { label: "Easy", value: stats.leetcode?.easy ?? "300+" },
-        { label: "Medium", value: stats.leetcode?.medium ?? "600+" },
+        { label: "Medium", value: stats.leetcode?.medium ?? "650+" },
         { label: "Hard", value: stats.leetcode?.hard ?? "150+" },
       ],
     },
