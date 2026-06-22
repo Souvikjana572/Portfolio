@@ -61,11 +61,8 @@ export default function About() {
             </p>
 
             <p className="mt-4 text-gray-300 leading-relaxed text-base sm:text-lg max-w-2xl md:max-w-3xl">
-            I’m a final year Computer Science undergraduate passionate about software development, problem-solving, and scalable systems. I enjoy building real-world applications and writing clean, efficient code.
-
-I have experience in data structures & algorithms, full-stack development, and cloud technologies, and have solved hundreds of DSA problems across platforms. I’ve built projects using React, Node.js, MongoDB, and worked with AWS during my internship at Amazon, gaining exposure to production-level systems and engineering best practices.
-
-I’m continuously learning and exploring machine learning, system design, and backend engineering, while sharpening my competitive programming skills.</p>
+            I'm Souvik, a Software Engineer passionate about building scalable systems and solving complex problems. I have hands-on experience working on large-scale cloud infrastructure and multi-region service migrations during my time at Amazon. With a strong foundation in algorithms and software engineering principles, I enjoy designing efficient solutions, optimizing systems, and continuously learning emerging technologies in cloud computing and AI.
+.</p>
 
             {/* Quick stats */}
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-xl">
