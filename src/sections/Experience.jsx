@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import ParticleBackground from "../components/Particlesbackground";
 import amazonCert from "../assets/Amazon.pdf";
-
+import amazon_logo from "../assets/amazon_logo1.png";
+import solix_logo from "../assets/solix_logo.png";
+import amazon_logo2 from "../assets/amazon_logo2.png";
 const experiences = [
   {
     role: "Programmer/Analyst Intern",
@@ -194,17 +196,24 @@ function TimelineItem({ experience, index, isMobile }) {
               <h3 className="mt-4 text-2xl font-bold text-white sm:text-3xl">
                 {experience.role}
               </h3>
-              <p className="mt-2 text-lg font-semibold text-blue-300">
+              <p className="mt-2 hidden text-lg font-semibold text-blue-300 sm:block">
                 {experience.company}
               </p>
             </div>
 
-            {/* <div className="shrink-0 rounded-lg border border-gray-700/70 bg-gray-900/70 px-4 py-3 text-left sm:text-right"> */}
-              {/* <p className="text-sm font-semibold text-white">{experience.duration}</p> */}
-              {/* <p className="mt-1 max-w-[220px] text-xs leading-relaxed text-gray-400"> */}
-                {/* {experience.location} */}
-              {/* </p> */}
-            {/* </div> */}
+            <div className="flex h-12 w-24 shrink-0 items-center justify-center overflow-hidden sm:h-14 sm:w-28">
+              <img
+                src={
+                  experience.company === "Amazon"
+                    ? isMobile
+                      ? amazon_logo
+                      : amazon_logo2
+                    : solix_logo
+                }
+                alt={`${experience.company} logo`}
+                className="h-full w-full object-contain"
+              />
+            </div>
           </div>
 
           <p className="text-sm leading-7 text-gray-300 sm:text-base">
