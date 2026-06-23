@@ -35,11 +35,11 @@ const experiences = [
   {
     role: "Developer",
     company: "Solix",
-    duration: "June - July 2025",
-    startLabel: "June 2025",
-    startDateTime: "2025-06",
-    endLabel: "July 2025",
-    endDateTime: "2025-07",
+    duration: "June - July 2026",
+    startLabel: "June 2026",
+    startDateTime: "2026-06",
+    endLabel: "July 2026",
+    endDateTime: "2026-07",
     location: "India",
     type: "Freelance",
     description:
@@ -52,14 +52,14 @@ const experiences = [
     technologies: ["Flutter", "Dart", "Firebase", "Gemini API", "Cloud Firestore"],
   },
   {
-    role: "Software Developer",
-    company: "Current Role",
+    role: "Programmer/Analyst",
+    company: "Amazon",
     duration: "July 2026 - Present",
     startLabel: "July 2026",
     startDateTime: "2026-07",
     endLabel: "Present",
     location: "India",
-    type: "Current job",
+    type: "Full Time",
     description:
       "Building production-ready software with a focus on clean implementation, responsive user experiences, and reliable backend integrations. Working across modern web technologies while applying strong problem-solving fundamentals from competitive programming and software engineering.",
     highlights: [
@@ -67,7 +67,7 @@ const experiences = [
       "Designing maintainable components and reusable UI patterns",
       "Improving application reliability through testing, debugging, and performance tuning",
     ],
-    technologies: ["React", "JavaScript", "Tailwind CSS", "APIs", "Git"],
+    technologies: ["Typescript","Java","AWS","Softwares","Distributed Systems","Pipelines","CI/CD"],
   },
 ];
 
@@ -199,12 +199,12 @@ function TimelineItem({ experience, index, isMobile }) {
               </p>
             </div>
 
-            <div className="shrink-0 rounded-lg border border-gray-700/70 bg-gray-900/70 px-4 py-3 text-left sm:text-right">
-              <p className="text-sm font-semibold text-white">{experience.duration}</p>
-              <p className="mt-1 max-w-[220px] text-xs leading-relaxed text-gray-400">
-                {experience.location}
-              </p>
-            </div>
+            {/* <div className="shrink-0 rounded-lg border border-gray-700/70 bg-gray-900/70 px-4 py-3 text-left sm:text-right"> */}
+              {/* <p className="text-sm font-semibold text-white">{experience.duration}</p> */}
+              {/* <p className="mt-1 max-w-[220px] text-xs leading-relaxed text-gray-400"> */}
+                {/* {experience.location} */}
+              {/* </p> */}
+            {/* </div> */}
           </div>
 
           <p className="text-sm leading-7 text-gray-300 sm:text-base">
@@ -297,7 +297,7 @@ const Experience = () => {
             viewport={{ once: true, amount: 0.4 }}
             className="mt-5 text-base leading-7 text-gray-300 sm:text-lg"
           >
-            A scroll-linked timeline of my current work, internship experience, and the engineering problems I have helped solve.
+            A scroll-linked timeline of my work and  experience.
           </motion.p>
         </div>
 
