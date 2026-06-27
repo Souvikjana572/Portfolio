@@ -39,7 +39,7 @@ export default function Education() {
 					<div className="bg-gradient-to-br from-gray-900/60 to-gray-950/60 backdrop-blur-xl border border-gray-700/50 rounded-2xl p-6 text-center">
 						<h3 className="text-lg font-semibold text-white">JIS College of Engineering, Nadia</h3>
 						<p className="text-sm text-gray-300 mt-2">B.Tech in Computer Science & Engineering</p>
-						<p className="text-2xl font-bold text-white mt-3">CGPA: 8.45</p>
+						<p className="text-2xl font-bold text-white mt-3">CGPA: 8.5</p>
 						<p className="text-xs text-gray-400 mt-3">Duration: 2022–2026</p>
 					</div>
 				</div>
