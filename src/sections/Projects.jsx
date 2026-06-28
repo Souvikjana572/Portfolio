@@ -8,10 +8,10 @@ import { FaGithub, FaLock } from "react-icons/fa";
 // Importing project images (desktop & mobile versions)
 import img1 from "../assets/SOLIX.png";
 import img2 from "../assets/StudentMS.png";
-import img3 from "../assets/CHESS1.png";
+import img3 from "../assets/chess1.png";
 import photo1 from "../assets/solixMobile.png";
 import photo2 from "../assets/studentms1.png";
-import photo3 from "../assets/chess.png";
+import photo3 from "../assets/CHESS.png";
 
 const MH3 = motion.h3;
 // Shortcut for <motion.h3> for easier typing
