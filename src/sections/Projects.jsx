@@ -8,10 +8,10 @@ import { FaGithub, FaLock } from "react-icons/fa";
 // Importing project images (desktop & mobile versions)
 import img1 from "../assets/SOLIX.png";
 import img2 from "../assets/StudentMS.png";
-import img3 from "../assets/chess1.png";
+import img3 from "../assets/CHESS1.png";
 import photo1 from "../assets/solixMobile.png";
 import photo2 from "../assets/studentms1.png";
-import photo3 from "../assets/chess1.png";
+import photo3 from "../assets/chess.png";
 
 const MH3 = motion.h3; 
 // Shortcut for <motion.h3> for easier typing
@@ -79,7 +79,7 @@ export default function Projects() {
       {
         title: "Chess",
         repo: "https://github.com/Souvikjana572/Chess",
-        bgColor: "#000000",
+        bgColor: "#2b3f34",
         sceneBg:
           "radial-gradient(circle at 18% 20%, rgba(202, 139, 38, 0.16), transparent 30%), radial-gradient(circle at 82% 78%, rgba(91, 54, 18, 0.22), transparent 34%), linear-gradient(135deg, #050302 0%, #120a04 46%, #241707 100%)",
         image: isMobile ? photo3 : img3,
