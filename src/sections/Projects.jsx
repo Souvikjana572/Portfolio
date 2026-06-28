@@ -1,5 +1,5 @@
-import React from "react"; 
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"; 
+import React from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { FaGithub, FaLock } from "react-icons/fa";
 // motion: for animating elements
 // useScroll: to track scroll position
@@ -13,7 +13,7 @@ import photo1 from "../assets/solixMobile.png";
 import photo2 from "../assets/studentms1.png";
 import photo3 from "../assets/chess.png";
 
-const MH3 = motion.h3; 
+const MH3 = motion.h3;
 // Shortcut for <motion.h3> for easier typing
 
 // 🔹 Custom Hook: Detects if screen size matches "mobile"
@@ -27,20 +27,20 @@ const useIsMobile = (query = "(max-width: 639px)") => {
     if (typeof window === "undefined") return;
     const mql = window.matchMedia(query); // Media query list
     const handler = (e) => setIsMobile(e.matches); // Update state when query changes
-    mql.addEventListener?.("change", handler) || mql.addListener(handler); 
+    mql.addEventListener?.("change", handler) || mql.addListener(handler);
     // Add correct event listener (modern OR fallback)
 
     setIsMobile(mql.matches); // Initialize with current screen size
     return () =>
-      mql.removeEventListener?.("change", handler) || mql.removeListener(handler); 
+      mql.removeEventListener?.("change", handler) || mql.removeListener(handler);
     // Cleanup event listener
   }, [query]);
 
-  return isMobile; 
+  return isMobile;
 };
 
 export default function Projects() {
-  const isMobile = useIsMobile(); 
+  const isMobile = useIsMobile();
   // Detect if the user is on a mobile screen
 
   // 🔹 List of project objects (dynamic images based on screen size)
@@ -79,13 +79,13 @@ export default function Projects() {
       {
         title: "Chess",
         repo: "https://github.com/Souvikjana572/Chess",
-        bgColor: "#2b3f34",
+        bgColor: "#000000ff",
         sceneBg:
-          "radial-gradient(circle at 18% 20%, rgba(202, 139, 38, 0.16), transparent 30%), radial-gradient(circle at 82% 78%, rgba(91, 54, 18, 0.22), transparent 34%), linear-gradient(135deg, #050302 0%, #120a04 46%, #241707 100%)",
+          "radial-gradient(circle at 18% 20%, rgba(38, 202, 139, 0.16), transparent 30%), radial-gradient(circle at 82% 78%, rgba(34, 139, 34, 0.22), transparent 34%), linear-gradient(135deg, #050302 0%, #0b110dff 46%, #072418ff 100%)",
         image: isMobile ? photo3 : img3,
         imageBg: isMobile
           ? "#000000"
-          : "#000000",
+          : "#091810ff",
         imageFit: isMobile ? "cover" : "contain",
         imageWidth: isMobile ? "100%" : "78%",
         description:
@@ -93,49 +93,49 @@ export default function Projects() {
         technologies: "Node.js, Express, Socket.IO, EJS, Vanilla JavaScript, chess.js, Tailwind CSS",
       },
     ],
-    [isMobile] 
+    [isMobile]
     // Memoize to prevent recalculating unless screen size changes
   );
 
-  const sceneRef = React.useRef(null); 
+  const sceneRef = React.useRef(null);
   // Reference to the whole projects section (used for scroll tracking)
 
   const { scrollYProgress } = useScroll({
-    target: sceneRef, 
-    offset: ["start start", "end end"], 
+    target: sceneRef,
+    offset: ["start start", "end end"],
     // Scroll progress is 0 when section top hits viewport top and 1 at the end
   });
   const exitFadeOpacity = useTransform(scrollYProgress, [0.74, 1], [0, 1]);
 
-  const thresholds = projects.map((_, i) => (i + 1) / projects.length); 
+  const thresholds = projects.map((_, i) => (i + 1) / projects.length);
   // Array of thresholds to switch between projects as user scrolls
-  const [activeIndex, setActiveIndex] = React.useState(0); 
+  const [activeIndex, setActiveIndex] = React.useState(0);
   // Keeps track of which project is currently active
 
   // 🔹 Update activeIndex as user scrolls
   React.useEffect(() => {
     const unsubscribe = scrollYProgress.onChange((v) => {
-      const idx = thresholds.findIndex((t) => v <= t); 
+      const idx = thresholds.findIndex((t) => v <= t);
       // Find the first threshold that is greater than or equal to scroll progress
-      setActiveIndex(idx === -1 ? thresholds.length - 1 : idx); 
+      setActiveIndex(idx === -1 ? thresholds.length - 1 : idx);
       // If not found, show the last project
     });
-    return () => unsubscribe(); 
+    return () => unsubscribe();
     // Cleanup scroll listener
   }, [scrollYProgress, thresholds]);
 
-  const activeProject = projects[activeIndex]; 
+  const activeProject = projects[activeIndex];
   // Currently displayed project
 
   return (
     <section
       id="projects"
-      ref={sceneRef} 
+      ref={sceneRef}
       className="relative text-white"
       style={{
-        height: `${100 * projects.length}vh`, 
+        height: `${100 * projects.length}vh`,
         // Section height = 100vh per project (makes scroll-based transitions work) 
-        background: activeProject.sceneBg || activeProject.bgColor, 
+        background: activeProject.sceneBg || activeProject.bgColor,
         // Background changes color based on active project
         transition: "none",
       }}
@@ -147,10 +147,10 @@ export default function Projects() {
 
       {/* Sticky container keeps content fixed while scrolling */}
       <div className="sticky top-0 z-10 h-screen flex flex-col items-center justify-center">
-        
+
         {/* Section Title */}
         <h2 className={`text-3xl font-semibold z-10 text-center ${isMobile ? "mt-4" : "mt-8"}`}>
-          My Work 
+          My Work
         </h2>
 
         {/* Main Project Display Area */}
@@ -158,9 +158,8 @@ export default function Projects() {
           {projects.map((project, idx) => (
             <div
               key={project.title}
-              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${
-                activeIndex === idx ? "opacity-100 z-20" : "opacity-0 z-0 sm:z-10"
-              }`}
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${activeIndex === idx ? "opacity-100 z-20" : "opacity-0 z-0 sm:z-10"
+                }`}
               style={{ width: "85%", maxWidth: "1200px" }}
             >
               {/* Animate project title when switching */}
@@ -182,9 +181,8 @@ export default function Projects() {
 
               {/* Project Image Wrapper */}
               <div
-                className={`relative flex w-full items-center justify-center overflow-hidden bg-black/20 shadow-2xl md:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.7)] ${
-                  isMobile ? "mb-6 rounded-lg" : "mb-10 sm:mb-12 rounded-xl"
-                } h-[62vh] sm:h-[66vh]`}
+                className={`relative flex w-full items-center justify-center overflow-hidden bg-black/20 shadow-2xl md:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.7)] ${isMobile ? "mb-6 rounded-lg" : "mb-10 sm:mb-12 rounded-xl"
+                  } h-[62vh] sm:h-[66vh]`}
                 style={{
                   zIndex: 10,
                   transition: "box-shadow 250ms ease",
