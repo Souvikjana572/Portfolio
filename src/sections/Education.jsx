@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import ParticleBackground from "../components/Particlesbackground";
 export default function Education() {
 	return (
-        		<section id="education" className="w-full py-20 bg-black text-white relative overflow-hidden">
+		<section id="education" className="w-full py-20 bg-black text-white relative overflow-hidden">
 			<ParticleBackground />
 			<div className="max-w-5xl mx-auto px-6 relative z-10">
 				<motion.h2
@@ -29,7 +29,7 @@ export default function Education() {
 					<div className="bg-gradient-to-br from-gray-900/60 to-gray-950/60 backdrop-blur-xl border border-gray-700/50 rounded-2xl p-6 text-center">
 						<h3 className="text-lg font-semibold text-white">Digha Vidyabhawan</h3>
 						<p className="text-sm text-gray-300 mt-2">Higher Secondary(Class-XII)</p>
-                        <p className="text-sm text-gray-300 mt-2">Stream - Science (PCMB)</p>
+						<p className="text-sm text-gray-300 mt-2">Stream - Science (PCMB)</p>
 						<p className="text-2xl font-bold text-white mt-3">88.6%</p>
 						<p className="text-sm text-gray-300 mt-2">West Bengal Council of Higher Secondary Education</p>
 						<p className="text-xs text-gray-400 mt-3">Year: 2021-22</p>
@@ -39,12 +39,12 @@ export default function Education() {
 					<div className="bg-gradient-to-br from-gray-900/60 to-gray-950/60 backdrop-blur-xl border border-gray-700/50 rounded-2xl p-6 text-center">
 						<h3 className="text-lg font-semibold text-white">JIS College of Engineering, Nadia</h3>
 						<p className="text-sm text-gray-300 mt-2">B.Tech in Computer Science & Engineering</p>
-						<p className="text-2xl font-bold text-white mt-3">CGPA: 8.5</p>
+						<p className="text-2xl font-bold text-white mt-3">CGPA: 8.50</p>
 						<p className="text-xs text-gray-400 mt-3">Duration: 2022–2026</p>
 					</div>
 				</div>
 
-				
+
 			</div>
 		</section>
 	);
