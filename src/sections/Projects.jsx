@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { FaGithub, FaLock } from "react-icons/fa";
+import { FaGithub, FaGooglePlay, FaLock } from "react-icons/fa";
 // motion: for animating elements
 // useScroll: to track scroll position
 // AnimatePresence: to animate components when mounting/unmounting
@@ -48,6 +48,7 @@ export default function Projects() {
     () => [
       {
         title: "Solix - Health Monitoring App",
+        playStore: "https://play.google.com/store/apps/details?id=app.solix.com&pcampaignid=web_share",
         bgColor: "#03141c",
         sceneBg: isMobile
           ? "#03141c"
@@ -220,7 +221,18 @@ export default function Projects() {
                     <h3 className="text-xl font-bangers italic font-semibold text-white/95">
                       {project.title}
                     </h3>
-                    {project.repo ? (
+                    {project.playStore ? (
+                      <a
+                        href={project.playStore}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center rounded-lg bg-white/95 p-2 text-black shadow-md"
+                        aria-label={`Open ${project.title} on Google Play`}
+                        title="View on Google Play"
+                      >
+                        <FaGooglePlay className="text-xl" />
+                      </a>
+                    ) : project.repo ? (
                       <a
                         href={project.repo}
                         target="_blank"
@@ -258,7 +270,20 @@ export default function Projects() {
         </div>
 
         {/* GitHub Repo Button */}
-        {activeProject?.repo ? (
+        {activeProject?.playStore ? (
+          <div className="absolute right-4 sm:right-[clamp(2.5rem,4vw,8rem)] top-1/2 -translate-y-1/2 z-30 hidden sm:block">
+            <a
+              href={activeProject.playStore}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-4 py-3 sm:px-5 sm:py-3 rounded-xl bg-white/95 text-black hover:bg-white transition-all shadow-lg"
+              aria-label={`Open ${activeProject.title} on Google Play`}
+              title="View on Google Play"
+            >
+              <FaGooglePlay className="text-2xl sm:text-3xl" />
+            </a>
+          </div>
+        ) : activeProject?.repo ? (
           <div className="absolute right-4 sm:right-[clamp(2.5rem,4vw,8rem)] top-1/2 -translate-y-1/2 z-30 hidden sm:block">
             <a
               href={activeProject.repo}
