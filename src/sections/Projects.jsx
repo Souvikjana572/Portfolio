@@ -63,7 +63,7 @@ export default function Projects() {
           "An A.I. health monitoring app that tracks user health data, provides insights, and integrates with Gemini API for advanced analytics.",
         technologies:
           "Flutter, Dart, Firebase Core, Firebase Auth, Cloud Firestore, Firebase Storage, Gemini API ",
-        status: "In production. release soon",
+        status: "Available on Google Play Store",
       },
       {
         title: "Student Management System",
