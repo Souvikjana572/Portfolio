@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import ParticleBackground from "../components/Particlesbackground";
 import amazonCert from "../assets/Amazon.pdf";
 import amazon_logo from "../assets/amazon_logo1.png";
@@ -14,7 +15,7 @@ const experiences = [
     startDateTime: "2025-07",
     endLabel: "Dec 2025",
     endDateTime: "2025-12",
-    // location: "HYD13, Amazon Hyderabad Development Center",
+    location: "HYD13, Amazon Hyderabad Development Center",
     type: "Internship",
     certificate: amazonCert,
     description:
@@ -42,7 +43,7 @@ const experiences = [
     startDateTime: "2026-06",
     endLabel: "July 2026",
     endDateTime: "2026-07",
-    location: "India",
+    location: "Remote",
     type: "Freelance",
     description:
       "Developed An A.I. health monitoring app that tracks user health data, provides insights, and integrates with Gemini API for advanced analytics.",
@@ -60,7 +61,7 @@ const experiences = [
     startLabel: "July 2026",
     startDateTime: "2026-07",
     endLabel: "Present",
-    location: "India",
+    location: "HYD13, Amazon Hyderabad Development Center",
     type: "Full Time",
     description:
       "Building production-ready software with a focus on clean implementation, responsive user experiences, and reliable backend integrations. Working across modern web technologies while applying strong problem-solving fundamentals from competitive programming and software engineering.",
@@ -69,7 +70,7 @@ const experiences = [
       "Designing maintainable components and reusable UI patterns",
       "Improving application reliability through testing, debugging, and performance tuning",
     ],
-    technologies: ["Typescript","Java","AWS","Softwares","Distributed Systems","Pipelines","CI/CD"],
+    technologies: ["Typescript", "Java", "AWS", "Softwares", "Distributed Systems", "Pipelines", "CI/CD"],
   },
 ];
 
@@ -125,9 +126,8 @@ function TimelineDateMarker({ label, dateTime, position, isLeft, isMobile }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35 }}
       viewport={{ once: true, amount: 0.55 }}
-      className={`absolute left-4 z-30 -translate-x-1/2 md:left-1/2 ${
-        position === "top" ? "top-0" : "bottom-0"
-      }`}
+      className={`absolute left-4 z-30 -translate-x-1/2 md:left-1/2 ${position === "top" ? "top-0" : "bottom-0"
+        }`}
     >
       <span
         className={`absolute top-1/2 h-px w-7 -translate-y-1/2 bg-blue-300/70 ${tickPosition}`}
@@ -199,6 +199,12 @@ function TimelineItem({ experience, index, isMobile }) {
               <p className="mt-2 hidden text-lg font-semibold text-blue-300 sm:block">
                 {experience.company}
               </p>
+              {experience.location && (
+                <p className="mt-2 flex items-center gap-2 text-sm font-medium text-gray-300">
+                  <FaMapMarkerAlt className="shrink-0 text-blue-300" aria-hidden="true" />
+                  <span>{experience.location}</span>
+                </p>
+              )}
             </div>
 
             <div className="flex h-12 w-24 shrink-0 items-center justify-center overflow-hidden sm:h-14 sm:w-28">
