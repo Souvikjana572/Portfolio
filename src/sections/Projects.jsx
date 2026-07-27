@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { FaGithub, FaGooglePlay, FaLock } from "react-icons/fa";
+import { FaExternalLinkAlt, FaGithub, FaGooglePlay, FaLock } from "react-icons/fa";
 // motion: for animating elements
 // useScroll: to track scroll position
 // AnimatePresence: to animate components when mounting/unmounting
@@ -9,9 +9,11 @@ import { FaGithub, FaGooglePlay, FaLock } from "react-icons/fa";
 import img1 from "../assets/SOLIX.png";
 import img2 from "../assets/StudentMS.png";
 import img3 from "../assets/chess1.png";
+import img4 from "../assets/Lagao.png";
 import photo1 from "../assets/solixMobile.png";
 import photo2 from "../assets/studentms1.png";
 import photo3 from "../assets/CHESS.png";
+import photo4 from "../assets/lagaoMobile.png";
 
 const MH3 = motion.h3;
 // Shortcut for <motion.h3> for easier typing
@@ -64,6 +66,22 @@ export default function Projects() {
         technologies:
           "Flutter, Dart, Firebase Core, Firebase Auth, Cloud Firestore, Firebase Storage, Gemini API ",
         status: "Available on Google Play Store",
+      },
+      {
+        title: "Lagao - Plant Store",
+        live: "https://lagao-store.vercel.app/",
+        bgColor: "#000000ff",
+        sceneBg:
+          "radial-gradient(circle at 18% 20%, rgba(38, 202, 139, 0.18), transparent 30%), radial-gradient(circle at 82% 78%, rgba(34, 139, 34, 0.24), transparent 34%), linear-gradient(135deg, #050302 0%, #0b110dff 46%, #072418ff 100%)",
+        image: isMobile ? photo4 : img4,
+        imageBg: isMobile
+          ? "#000000"
+          : "#091810ff",
+        imageFit: isMobile ? "cover" : "contain",
+        imageWidth: isMobile ? "100%" : "82%",
+        description:
+          "An online plant shopping application where users can browse and order different types of plants with home delivery and secure online payment options.",
+        technologies: "React, Tailwind CSS, React-Router, JWT, TypeScript,  PostgreSQL, StripeRazorpay,Google navigator API",
       },
       {
         title: "Student Management System",
@@ -232,6 +250,17 @@ export default function Projects() {
                       >
                         <FaGooglePlay className="text-xl" />
                       </a>
+                    ) : project.live ? (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center rounded-lg bg-white/95 p-2 text-black shadow-md"
+                        aria-label={`Open ${project.title} live site`}
+                        title="View live site"
+                      >
+                        <FaExternalLinkAlt className="text-xl" />
+                      </a>
                     ) : project.repo ? (
                       <a
                         href={project.repo}
@@ -281,6 +310,19 @@ export default function Projects() {
               title="View on Google Play"
             >
               <FaGooglePlay className="text-2xl sm:text-3xl" />
+            </a>
+          </div>
+        ) : activeProject?.live ? (
+          <div className="absolute right-4 sm:right-[clamp(2.5rem,4vw,8rem)] top-1/2 -translate-y-1/2 z-30 hidden sm:block">
+            <a
+              href={activeProject.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-4 py-3 sm:px-5 sm:py-3 rounded-xl bg-white/95 text-black hover:bg-white transition-all shadow-lg"
+              aria-label={`Open ${activeProject.title} live site`}
+              title="View live site"
+            >
+              <FaExternalLinkAlt className="text-2xl sm:text-3xl" />
             </a>
           </div>
         ) : activeProject?.repo ? (
