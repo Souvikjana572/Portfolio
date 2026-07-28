@@ -81,7 +81,7 @@ export default function Projects() {
         imageWidth: isMobile ? "100%" : "82%",
         description:
           "An online plant shopping application where users can browse and order different types of plants with home delivery and secure online payment options.",
-        technologies: "React, Tailwind CSS, React-Router, JWT, TypeScript,  PostgreSQL, StripeRazorpay,Google navigator API",
+        technologies: "React, Node.js ,Tailwind CSS, React-Router, JWT, TypeScript,  PostgreSQL, StripeRazorpay,Google navigator API",
       },
       {
         title: "Student Management System",
