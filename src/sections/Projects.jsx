@@ -109,7 +109,7 @@ export default function Projects() {
         imageWidth: isMobile ? "100%" : "78%",
         description:
           "Real-time 1v1 multiplayer chess app with live move sync for players and spectators, including game-over and reset flow.",
-        technologies: "Node.js, Express, Socket.IO, EJS, Vanilla JavaScript, chess.js, Tailwind CSS",
+        technologies: "Node.js, Express, Socket.IO, EJS, Vanilla JS, chess.js, Tailwind CSS",
       },
     ],
     [isMobile]
