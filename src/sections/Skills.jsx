@@ -171,16 +171,16 @@ useEffect(()=> {
         </motion.p>
       </div>
 
-      <div  className='relative w-full overflow-hidden px-6'>
+      <div  className='relative w-full overflow-hidden px-3 sm:px-6'>
         <motion.div 
           ref={trackRef}
-          className='flex gap-10 text-5xl'
+          className='flex gap-4 text-3xl sm:gap-10 sm:text-5xl'
           style={{x, whiteSpace: "nowrap" , willChange: "transform"}}
         >
           {repeated.map((s,i) => (
             <motion.div 
               key={i} 
-              className='flex flex-col items-center gap-3 min-w-[140px] p-4 rounded-xl border border-blue-400/30 bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-md hover:border-blue-400/60 hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-500/20 transition-all duration-300 group'
+              className='flex flex-col items-center gap-2 min-w-[82px] p-2 rounded-lg border border-blue-400/30 bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-md hover:border-blue-400/60 hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-500/20 transition-all duration-300 group sm:gap-3 sm:min-w-[140px] sm:p-4 sm:rounded-xl'
               aria-label={s.name}
               title={s.name}
               whileHover={{ scale: 1.05, y: -5 }}
@@ -188,7 +188,7 @@ useEffect(()=> {
               <span className='text-blue-300 group-hover:text-blue-200 transition-colors duration-300'>
                 {s.icon}
               </span>
-              <p className='text-sm text-gray-300 group-hover:text-white transition-colors duration-300 font-medium text-center'>
+              <p className='text-[11px] text-gray-300 group-hover:text-white transition-colors duration-300 font-medium text-center leading-tight sm:text-sm'>
                 {s.name}
               </p>
             </motion.div>
