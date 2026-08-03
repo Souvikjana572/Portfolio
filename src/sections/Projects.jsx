@@ -93,7 +93,7 @@ export default function Projects() {
         imageWidth: "100%",
         description:
           "Role-based platform for Admin, Teacher, and Student workflows including attendance, marks, assignments, and course management.",
-        technologies: "React, React Router, React Bootstrap, Node.js, Express, MongoDB, Mongoose, JWT, Axios",
+        technologies: "React, React Router, Express.js, Node.js, Express, MongoDB, Mongoose, JWT, Axios",
       },
       {
         title: "Chess",
