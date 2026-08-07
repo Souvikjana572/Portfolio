@@ -64,7 +64,7 @@ export default function Projects() {
         description:
           "An A.I. health monitoring app that tracks user health data, provides insights, and integrates with Gemini API for advanced analytics.",
         technologies:
-          "Flutter, Dart, Firebase Core, Firebase Auth, Cloud Firestore, Firebase Storage, Gemini API ",
+          "Flutter, Dart, Firebase Core, Firebase Auth, Cloud Firestore, Firebase Storage, Gemini-API ",
         status: "Available on Google Play Store",
       },
       {
