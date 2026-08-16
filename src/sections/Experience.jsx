@@ -64,9 +64,9 @@ const experiences = [
     location: "HYD13, Amazon Hyderabad Development Center",
     type: "Full Time",
     description:
-      "Building production-ready software with a focus on clean implementation, responsive user experiences, and reliable backend integrations. Working across modern web technologies while applying strong problem-solving fundamentals from competitive programming and software engineering.",
+      "Building production-ready software with a focus on clean implementation, responsive user experiences, and reliable backend integrations for Amazon's global logistics network.",
     highlights: [
-      "Developing user-facing features with React and modern JavaScript",
+      "Developing Services that handles hundreds of carriers and millions of requests per day in Aamzon's global logistics network",
       "Designing maintainable components and reusable UI patterns",
       "Improving application reliability through testing, debugging, and performance tuning",
     ],
