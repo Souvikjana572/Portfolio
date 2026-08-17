@@ -33,6 +33,7 @@ const experiences = [
       "CI/CD",
       "DevOps",
       "Testing",
+      "UI/UX"
     ],
   },
   {
