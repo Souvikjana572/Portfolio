@@ -71,7 +71,7 @@ const experiences = [
       "Designing maintainable components and reusable UI patterns",
       "Improving application reliability through testing, debugging, and performance tuning",
     ],
-    technologies: ["Typescript", "Java", "AWS", "Softwares", "Distributed Systems", "Pipelines", "CI/CD"],
+    technologies: ["Typescript", "Java", "AWS","Testing", "Softwares", "Distributed Systems", "Pipelines", "CI/CD"],
   },
 ];
 
