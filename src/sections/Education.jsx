@@ -22,7 +22,7 @@ export default function Education() {
 						<p className="text-sm text-gray-300 mt-2">Secondary(Class-X)</p>
 						<p className="text-2xl font-bold text-white mt-3">91.42%</p>
 						<p className="text-sm text-gray-300 mt-2">West Bengal Board of Secondary Education</p>
-						<p className="text-xs text-gray-400 mt-3">Year: 2019-20</p>
+						<p className="text-xs text-gray-400 mt-3">Passing Year: 2019-20</p>
 					</div>
 
 					{/* Class XII */}
@@ -32,7 +32,7 @@ export default function Education() {
 						<p className="text-sm text-gray-300 mt-2">Stream - Science (PCMB)</p>
 						<p className="text-2xl font-bold text-white mt-3">88.6%</p>
 						<p className="text-sm text-gray-300 mt-2">West Bengal Council of Higher Secondary Education</p>
-						<p className="text-xs text-gray-400 mt-3">Year: 2021-22</p>
+						<p className="text-xs text-gray-400 mt-3">Passing Year: 2021-22</p>
 					</div>
 
 					{/* College */}
