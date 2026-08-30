@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
-import avatar from "../assets/avator.png";
 import resumePdf from "../assets/Resume.pdf";
 import { FaGithub } from "react-icons/fa6";
 import { SiCodeforces, SiCodechef, SiLeetcode, SiGeeksforgeeks, SiChessdotcom } from "react-icons/si";
 import ParticleBackground from "../components/Particlesbackground";
+import Avatar3D from "../components/Avatar3D";
 
 const socials = [
   { Icon: FaGithub, label: "GitHub", href: "https://github.com/Souvikjana572" },
@@ -198,35 +198,24 @@ const Home = React.forwardRef((props, ref) => {
           </div>
         </motion.div>
 
-        {/* right */}
+        {/* right - 3D Interactive Model */}
         <motion.div
-          className="relative hidden lg:block"
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
+          className="relative flex items-center justify-center w-full h-[350px] sm:h-[450px] lg:h-full"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.7, duration: 1 }}
         >
+          {/* Glowing background backdrop */}
           <div
-            className="absolute top-1/2 -translate-y-1/2 pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none w-[300px] h-[300px] sm:w-[420px] sm:h-[420px] rounded-full"
             style={{
-              right: "10px",
-              width: "min(22vw, 410px)",
-              height: "min(40vw, 760px)",
-              borderRadius: "50%",
-              filter: "blur(38px)",
+              filter: "blur(60px)",
               opacity: 0.35,
               background:
-                "conic-gradient(from 0deg, #3b82f6, #a855f7, #3b82f6)",
+                "radial-gradient(circle, rgba(59,130,246,0.6) 0%, rgba(168,85,247,0.4) 50%, rgba(0,0,0,0) 70%)",
             }}
           />
-          <motion.img
-            src={avatar}
-            alt="Souvik Jana avatar"
-            className="absolute top-1/2 -translate-y-1/2 object-contain select-none pointer-events-none"
-            style={{ right: "-30px", width: "min(45vw, 780px)", maxHeight: "90vh" }}
-            initial={{ opacity: 0, y: 40, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 1, duration: 1 }}
-          />
+          <Avatar3D />
         </motion.div>
       </div>
     </section>
