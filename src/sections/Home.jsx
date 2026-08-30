@@ -198,9 +198,9 @@ const Home = React.forwardRef((props, ref) => {
           </div>
         </motion.div>
 
-        {/* right - 3D Interactive Model */}
+        {/* right - 3D Interactive Model (Desktop only) */}
         <motion.div
-          className="relative flex items-center justify-center w-full h-[350px] sm:h-[450px] lg:h-full"
+          className="relative hidden lg:flex items-center justify-center w-full h-[500px] xl:h-[600px]"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.7, duration: 1 }}
