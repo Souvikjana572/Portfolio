@@ -13,11 +13,11 @@ export default function Avatar3D() {
     const width = container.clientWidth || 550;
     const height = container.clientHeight || 550;
 
-    // Scene setup
+    // Scene & Camera
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.z = 7;
+    camera.position.set(0, 1.2, 6.5);
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -33,152 +33,316 @@ export default function Avatar3D() {
     scene.add(mainGroup);
 
     // ----------------------------------------------------
-    // 1. Inner Multi-Faceted Crystal Core
+    // 0. Procedural Code Terminal Texture for Laptop Screen
     // ----------------------------------------------------
-    const crystalGeo = new THREE.OctahedronGeometry(1.1, 2);
-    const crystalMat = new THREE.MeshPhysicalMaterial({
-      color: 0x3b82f6,
-      emissive: 0x1d4ed8,
-      emissiveIntensity: 0.7,
-      metalness: 0.85,
-      roughness: 0.15,
+    const canvasTex = document.createElement("canvas");
+    canvasTex.width = 1024;
+    canvasTex.height = 640;
+    const ctx = canvasTex.getContext("2d");
+
+    const renderTerminalTexture = () => {
+      // Dark Terminal background
+      ctx.fillStyle = "#090d16";
+      ctx.fillRect(0, 0, canvasTex.width, canvasTex.height);
+
+      // Terminal Header bar
+      ctx.fillStyle = "#1e293b";
+      ctx.fillRect(0, 0, canvasTex.width, 48);
+
+      // Window control buttons (red, yellow, green)
+      ctx.fillStyle = "#ef4444";
+      ctx.beginPath();
+      ctx.arc(30, 24, 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#f59e0b";
+      ctx.beginPath();
+      ctx.arc(54, 24, 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#10b981";
+      ctx.beginPath();
+      ctx.arc(78, 24, 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Title
+      ctx.fillStyle = "#94a3b8";
+      ctx.font = "bold 20px monospace";
+      ctx.fillText("souvik@dev-workstation: ~/portfolio", 110, 31);
+
+      // Code Lines
+      const codeLines = [
+        { text: "const developer = new SoftwareEngineer({", color: "#60a5fa" },
+        { text: '  name: "Souvik Jana",', color: "#f472b6" },
+        { text: '  role: "Full Stack & Systems Engineer",', color: "#34d399" },
+        { text: '  skills: ["React", "Node.js", "C++", "Cloud", "AI"],', color: "#c084fc" },
+        { text: "});", color: "#60a5fa" },
+        { text: "", color: "" },
+        { text: "async function deployAwesomeProject() {", color: "#fbbf24" },
+        { text: "  await developer.buildScalableSystems();", color: "#38bdf8" },
+        { text: '  console.log("🚀 System Deployed Successfully!");', color: "#4ade80" },
+        { text: "}", color: "#fbbf24" },
+        { text: "", color: "" },
+        { text: "// Status: Active & Ready for New Challenges", color: "#64748b" },
+        { text: "developer.solveComplexProblems(); ▌", color: "#38bdf8" },
+      ];
+
+      let yPos = 95;
+      ctx.font = "bold 24px monospace";
+      codeLines.forEach((line) => {
+        if (line.text) {
+          ctx.fillStyle = line.color;
+          ctx.fillText(line.text, 40, yPos);
+        }
+        yPos += 38;
+      });
+    };
+
+    renderTerminalTexture();
+    const screenTexture = new THREE.CanvasTexture(canvasTex);
+
+    // ----------------------------------------------------
+    // 1. 3D Cybernetic Laptop Workstation
+    // ----------------------------------------------------
+    const laptopGroup = new THREE.Group();
+    mainGroup.add(laptopGroup);
+
+    // 1a. Base Chassis
+    const baseGeo = new THREE.BoxGeometry(3.4, 0.14, 2.3);
+    const baseMat = new THREE.MeshPhysicalMaterial({
+      color: 0x0f172a,
+      metalness: 0.9,
+      roughness: 0.2,
       clearcoat: 1.0,
       clearcoatRoughness: 0.1,
-      flatShading: true,
     });
-    const crystalCore = new THREE.Mesh(crystalGeo, crystalMat);
-    mainGroup.add(crystalCore);
+    const baseMesh = new THREE.Mesh(baseGeo, baseMat);
+    baseMesh.position.y = -0.5;
+    laptopGroup.add(baseMesh);
 
-    // ----------------------------------------------------
-    // 2. Geodesic Outer Wireframe Cage
-    // ----------------------------------------------------
-    const cageGeo = new THREE.IcosahedronGeometry(1.65, 2);
-    const cageMat = new THREE.MeshPhysicalMaterial({
-      color: 0xc084fc,
-      emissive: 0x9333ea,
-      emissiveIntensity: 0.6,
-      metalness: 0.9,
-      roughness: 0.1,
-      wireframe: true,
+    // 1b. Keyboard Area & Backlit Keycap Grid
+    const kbGeo = new THREE.BoxGeometry(3.0, 0.04, 1.4);
+    const kbMat = new THREE.MeshStandardMaterial({
+      color: 0x1e293b,
+      emissive: 0x1d4ed8,
+      emissiveIntensity: 0.35,
+      roughness: 0.4,
+      metalness: 0.6,
     });
-    const cageMesh = new THREE.Mesh(cageGeo, cageMat);
-    mainGroup.add(cageMesh);
+    const kbMesh = new THREE.Mesh(kbGeo, kbMat);
+    kbMesh.position.set(0, -0.42, -0.2);
+    laptopGroup.add(kbMesh);
 
-    // ----------------------------------------------------
-    // 3. Holographic Pulse Energy Sphere
-    // ----------------------------------------------------
-    const pulseGeo = new THREE.SphereGeometry(1.85, 32, 32);
-    const pulseMat = new THREE.MeshBasicMaterial({
-      color: 0x60a5fa,
-      transparent: true,
-      opacity: 0.12,
-      wireframe: true,
-      blending: THREE.AdditiveBlending,
-    });
-    const pulseSphere = new THREE.Mesh(pulseGeo, pulseMat);
-    mainGroup.add(pulseSphere);
-
-    // ----------------------------------------------------
-    // 4. Concentric Orbital Holographic Rings
-    // ----------------------------------------------------
-    const ring1Geo = new THREE.TorusGeometry(2.35, 0.025, 16, 100);
-    const ring1Mat = new THREE.MeshStandardMaterial({
+    // Glowing Keycap Accent Lines
+    const kbLinesGeo = new THREE.PlaneGeometry(2.9, 1.3);
+    const kbLinesMat = new THREE.MeshBasicMaterial({
       color: 0x3b82f6,
-      emissive: 0x2563eb,
-      emissiveIntensity: 0.8,
-      metalness: 0.9,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.4,
+    });
+    const kbLines = new THREE.Mesh(kbLinesGeo, kbLinesMat);
+    kbLines.rotation.x = -Math.PI / 2;
+    kbLines.position.set(0, -0.39, -0.2);
+    laptopGroup.add(kbLines);
+
+    // 1c. Trackpad
+    const padGeo = new THREE.BoxGeometry(0.9, 0.02, 0.6);
+    const padMat = new THREE.MeshStandardMaterial({
+      color: 0x334155,
+      emissive: 0x38bdf8,
+      emissiveIntensity: 0.2,
       roughness: 0.2,
     });
-    const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
-    ring1.rotation.x = Math.PI / 3;
-    ring1.rotation.y = Math.PI / 6;
-    mainGroup.add(ring1);
+    const padMesh = new THREE.Mesh(padGeo, padMat);
+    padMesh.position.set(0, -0.42, 0.7);
+    laptopGroup.add(padMesh);
 
-    const ring2Geo = new THREE.TorusGeometry(2.75, 0.02, 16, 100);
-    const ring2Mat = new THREE.MeshStandardMaterial({
+    // 1d. Screen Lid Assembly
+    const screenLidGroup = new THREE.Group();
+    screenLidGroup.position.set(0, -0.43, -1.1); // Hinge location
+    screenLidGroup.rotation.x = -Math.PI / 9; // ~110 degrees open
+    laptopGroup.add(screenLidGroup);
+
+    // Outer Back Lid
+    const lidBackGeo = new THREE.BoxGeometry(3.4, 2.2, 0.08);
+    const lidBackMat = new THREE.MeshPhysicalMaterial({
+      color: 0x0f172a,
+      metalness: 0.95,
+      roughness: 0.15,
+      clearcoat: 1.0,
+    });
+    const lidBackMesh = new THREE.Mesh(lidBackGeo, lidBackMat);
+    lidBackMesh.position.set(0, 1.1, 0);
+    screenLidGroup.add(lidBackMesh);
+
+    // Glowing Souvik Jana / Developer Logo on Back of Lid
+    const logoGeo = new THREE.RingGeometry(0.2, 0.35, 32);
+    const logoMat = new THREE.MeshBasicMaterial({
       color: 0xa855f7,
-      emissive: 0x7e22ce,
-      emissiveIntensity: 0.8,
-      metalness: 0.9,
-      roughness: 0.2,
+      side: THREE.DoubleSide,
     });
-    const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
-    ring2.rotation.x = -Math.PI / 4;
-    ring2.rotation.y = Math.PI / 4;
-    mainGroup.add(ring2);
+    const logoMesh = new THREE.Mesh(logoGeo, logoMat);
+    logoMesh.position.set(0, 1.1, -0.05);
+    screenLidGroup.add(logoMesh);
+
+    // Front Display Bezel & Screen
+    const screenGeo = new THREE.PlaneGeometry(3.15, 1.95);
+    const screenMat = new THREE.MeshBasicMaterial({
+      map: screenTexture,
+    });
+    const screenMesh = new THREE.Mesh(screenGeo, screenMat);
+    screenMesh.position.set(0, 1.1, 0.045);
+    screenLidGroup.add(screenMesh);
+
+    // Terminal Screen Light Beam Emission
+    const screenLight = new THREE.PointLight(0x38bdf8, 3.5, 6);
+    screenLight.position.set(0, 1.1, 0.5);
+    screenLidGroup.add(screenLight);
 
     // ----------------------------------------------------
-    // 5. Orbiting Tech Satellite Orbs
+    // 2. 3D Floating Programming Code Symbols (`</>`, `{ }`, `=>`)
     // ----------------------------------------------------
-    const satellites = [];
-    const satCount = 4;
-    const satColors = [0x60a5fa, 0xc084fc, 0x34d399, 0xf472b6];
-    const satRadii = [2.2, 2.6, 3.0, 3.4];
-    const satSpeeds = [1.2, -0.9, 0.7, -1.1];
+    const codeSymbolsGroup = new THREE.Group();
+    mainGroup.add(codeSymbolsGroup);
 
+    // Helper to build 3D Bracket geometry shapes
+    const createBracketSymbol = (type, color) => {
+      const group = new THREE.Group();
+      const mat = new THREE.MeshStandardMaterial({
+        color: color,
+        emissive: color,
+        emissiveIntensity: 0.9,
+        roughness: 0.2,
+        metalness: 0.8,
+      });
+
+      if (type === "</>") {
+        // Left Angle `<`
+        const arm1 = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.08, 0.08), mat);
+        arm1.rotation.z = Math.PI / 4;
+        arm1.position.set(-0.35, 0.12, 0);
+
+        const arm2 = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.08, 0.08), mat);
+        arm2.rotation.z = -Math.PI / 4;
+        arm2.position.set(-0.35, -0.12, 0);
+
+        // Slash `/`
+        const slash = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.08, 0.08), mat);
+        slash.rotation.z = Math.PI / 3;
+
+        // Right Angle `>`
+        const arm3 = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.08, 0.08), mat);
+        arm3.rotation.z = -Math.PI / 4;
+        arm3.position.set(0.35, 0.12, 0);
+
+        const arm4 = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.08, 0.08), mat);
+        arm4.rotation.z = Math.PI / 4;
+        arm4.position.set(0.35, -0.12, 0);
+
+        group.add(arm1, arm2, slash, arm3, arm4);
+      } else if (type === "{}") {
+        // Curly Brace `{}` representation
+        const b1 = new THREE.Mesh(new THREE.TorusGeometry(0.25, 0.04, 12, 32, Math.PI), mat);
+        b1.position.x = -0.2;
+        const b2 = new THREE.Mesh(new THREE.TorusGeometry(0.25, 0.04, 12, 32, Math.PI), mat);
+        b2.rotation.z = Math.PI;
+        b2.position.x = 0.2;
+        group.add(b1, b2);
+      } else if (type === "=>") {
+        // Arrow operator `=>`
+        const line1 = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.07, 0.07), mat);
+        line1.position.set(-0.15, 0.07, 0);
+
+        const line2 = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.07, 0.07), mat);
+        line2.position.set(-0.15, -0.07, 0);
+
+        const tip1 = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.07, 0.07), mat);
+        tip1.rotation.z = -Math.PI / 4;
+        tip1.position.set(0.12, 0.08, 0);
+
+        const tip2 = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.07, 0.07), mat);
+        tip2.rotation.z = Math.PI / 4;
+        tip2.position.set(0.12, -0.08, 0);
+
+        group.add(line1, line2, tip1, tip2);
+      }
+
+      return group;
+    };
+
+    // Instantiate Symbols orbiting around workstation
+    const sym1 = createBracketSymbol("</>", 0x38bdf8); // Cyan Code Bracket
+    sym1.position.set(-2.2, 0.8, 1.0);
+    sym1.scale.setScalar(0.95);
+    codeSymbolsGroup.add(sym1);
+
+    const sym2 = createBracketSymbol("{}", 0xc084fc); // Purple Curly Braces
+    sym2.position.set(2.3, 1.2, -0.5);
+    sym2.scale.setScalar(1.1);
+    codeSymbolsGroup.add(sym2);
+
+    const sym3 = createBracketSymbol("=>", 0x34d399); // Green Arrow Operator
+    sym3.position.set(-2.0, -0.2, -1.2);
+    sym3.scale.setScalar(0.9);
+    codeSymbolsGroup.add(sym3);
+
+    // ----------------------------------------------------
+    // 3. Orbiting Data & Cloud Satellite Cubes
+    // ----------------------------------------------------
     const satGroup = new THREE.Group();
     mainGroup.add(satGroup);
 
-    for (let i = 0; i < satCount; i++) {
-      const satGeo = new THREE.SphereGeometry(0.12, 16, 16);
-      const satMat = new THREE.MeshStandardMaterial({
-        color: satColors[i],
-        emissive: satColors[i],
-        emissiveIntensity: 1.2,
-        roughness: 0.1,
-        metalness: 0.9,
+    const satNodes = [];
+    const nodeColors = [0x60a5fa, 0xa855f7, 0x34d399, 0xf472b6];
+    const nodeRadii = [2.4, 2.8, 3.1, 3.5];
+    const nodeSpeeds = [0.8, -0.7, 0.9, -0.6];
+
+    for (let i = 0; i < 4; i++) {
+      const nodeGeo = new THREE.BoxGeometry(0.25, 0.25, 0.25);
+      const nodeMat = new THREE.MeshStandardMaterial({
+        color: nodeColors[i],
+        emissive: nodeColors[i],
+        emissiveIntensity: 0.8,
+        wireframe: i % 2 === 0,
+        metalness: 0.8,
+        roughness: 0.2,
       });
-      const satMesh = new THREE.Mesh(satGeo, satMat);
+      const nodeMesh = new THREE.Mesh(nodeGeo, nodeMat);
 
-      // Light source attached to each satellite
-      const satLight = new THREE.PointLight(satColors[i], 1.5, 4);
-      satMesh.add(satLight);
-
-      satellites.push({
-        mesh: satMesh,
-        radius: satRadii[i],
-        speed: satSpeeds[i],
+      satNodes.push({
+        mesh: nodeMesh,
+        radius: nodeRadii[i],
+        speed: nodeSpeeds[i],
         angle: (i * Math.PI) / 2,
-        tilt: (i * Math.PI) / 5,
+        tilt: (i * Math.PI) / 4,
       });
 
-      satGroup.add(satMesh);
+      satGroup.add(nodeMesh);
     }
 
     // ----------------------------------------------------
-    // 6. Particle Vortex Swarm
+    // 4. Binary Code Particle Stream
     // ----------------------------------------------------
-    const particleCount = 320;
+    const particleCount = 260;
     const particleGeo = new THREE.BufferGeometry();
     const particlePos = new Float32Array(particleCount * 3);
-    const particleAngles = new Float32Array(particleCount);
-    const particleRadii = new Float32Array(particleCount);
-    const particleY = new Float32Array(particleCount);
+    const particleVelY = new Float32Array(particleCount);
 
     for (let i = 0; i < particleCount; i++) {
-      const r = 2.0 + Math.random() * 2.2;
-      const angle = Math.random() * Math.PI * 2;
-      const y = (Math.random() - 0.5) * 3.5;
-
-      particlePos[i * 3] = r * Math.cos(angle);
-      particlePos[i * 3 + 1] = y;
-      particlePos[i * 3 + 2] = r * Math.sin(angle);
-
-      particleAngles[i] = angle;
-      particleRadii[i] = r;
-      particleY[i] = y;
+      particlePos[i * 3] = (Math.random() - 0.5) * 5.0;
+      particlePos[i * 3 + 1] = (Math.random() - 0.5) * 4.0;
+      particlePos[i * 3 + 2] = (Math.random() - 0.5) * 5.0;
+      particleVelY[i] = 0.008 + Math.random() * 0.015;
     }
 
-    particleGeo.setAttribute(
-      "position",
-      new THREE.BufferAttribute(particlePos, 3)
-    );
+    particleGeo.setAttribute("position", new THREE.BufferAttribute(particlePos, 3));
 
     const particleMat = new THREE.PointsMaterial({
-      color: 0x93c5fd,
-      size: 0.055,
+      color: 0x60a5fa,
+      size: 0.05,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.8,
       blending: THREE.AdditiveBlending,
     });
 
@@ -186,7 +350,7 @@ export default function Avatar3D() {
     mainGroup.add(particleSystem);
 
     // ----------------------------------------------------
-    // 7. Lighting
+    // 5. Lighting Setup
     // ----------------------------------------------------
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
     scene.add(ambientLight);
@@ -196,21 +360,20 @@ export default function Avatar3D() {
     scene.add(blueLight);
 
     const purpleLight = new THREE.PointLight(0xa855f7, 4, 12);
-    purpleLight.position.set(-5, -5, 5);
+    purpleLight.position.set(-5, -4, 4);
     scene.add(purpleLight);
 
     const cyanLight = new THREE.PointLight(0x06b6d4, 3, 10);
-    cyanLight.position.set(0, 0, 6);
+    cyanLight.position.set(0, 2, 5);
     scene.add(cyanLight);
 
     // ----------------------------------------------------
-    // 8. Interaction State (Mouse & Touch Dragging)
+    // 6. Mouse & Drag Interaction
     // ----------------------------------------------------
     let mouseX = 0;
     let mouseY = 0;
     let targetRotX = 0;
     let targetRotY = 0;
-    let targetScale = 1.0;
 
     let isDown = false;
     let previousMouseX = 0;
@@ -230,11 +393,9 @@ export default function Avatar3D() {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      // Parallax target
       mouseX = (x / rect.width - 0.5) * 1.5;
       mouseY = (y / rect.height - 0.5) * 1.5;
 
-      // Dragging rotation
       if (isDown) {
         const deltaX = e.clientX - previousMouseX;
         const deltaY = e.clientY - previousMouseY;
@@ -252,24 +413,12 @@ export default function Avatar3D() {
       setIsDragging(false);
     };
 
-    const onMouseEnter = () => {
-      targetScale = 1.08;
-    };
-
-    const onMouseLeave = () => {
-      targetScale = 1.0;
-      isDown = false;
-      setIsDragging(false);
-    };
-
     const domElement = renderer.domElement;
     domElement.addEventListener("mousedown", onMouseDown);
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
-    domElement.addEventListener("mouseenter", onMouseEnter);
-    domElement.addEventListener("mouseleave", onMouseLeave);
 
-    // Touch events for drag interaction on touch desktop / tablet devices
+    // Touch events for drag interaction
     const onTouchStart = (e) => {
       if (e.touches.length === 1) {
         isDown = true;
@@ -309,7 +458,7 @@ export default function Avatar3D() {
     resizeObserver.observe(container);
 
     // ----------------------------------------------------
-    // 9. Main Animation Loop
+    // 7. Main Animation Loop
     // ----------------------------------------------------
     let animId;
     const clock = new THREE.Clock();
@@ -319,59 +468,57 @@ export default function Avatar3D() {
 
       const elapsed = clock.getElapsedTime();
 
-      // Inertia drag rotation
+      // Drag inertia rotation
       mainGroup.rotation.y += velY;
       mainGroup.rotation.x += velX;
       velY *= 0.92;
       velX *= 0.92;
 
-      // Base idle rotation
-      crystalCore.rotation.y = elapsed * 0.5;
-      crystalCore.rotation.x = elapsed * 0.25;
+      // Gentle floating bob for workstation
+      laptopGroup.position.y = Math.sin(elapsed * 1.5) * 0.12;
 
-      cageMesh.rotation.y = -elapsed * 0.35;
-      cageMesh.rotation.z = elapsed * 0.2;
+      // Floating & rotating programming symbols
+      sym1.rotation.y = elapsed * 0.8;
+      sym1.rotation.x = Math.sin(elapsed) * 0.3;
+      sym1.position.y = 0.8 + Math.sin(elapsed * 1.8) * 0.15;
 
-      pulseSphere.scale.setScalar(1 + Math.sin(elapsed * 2.5) * 0.04);
+      sym2.rotation.y = -elapsed * 0.7;
+      sym2.rotation.z = Math.cos(elapsed) * 0.3;
+      sym2.position.y = 1.2 + Math.cos(elapsed * 1.5) * 0.15;
 
-      ring1.rotation.z = elapsed * 0.3;
-      ring2.rotation.z = -elapsed * 0.35;
+      sym3.rotation.y = elapsed * 0.9;
+      sym3.position.y = -0.2 + Math.sin(elapsed * 2.0) * 0.12;
 
-      // Orbiting satellites update
-      satellites.forEach((sat) => {
-        sat.angle += sat.speed * 0.015;
-        sat.mesh.position.x = sat.radius * Math.cos(sat.angle);
-        sat.mesh.position.z = sat.radius * Math.sin(sat.angle);
-        sat.mesh.position.y = Math.sin(sat.angle * 2 + sat.tilt) * 0.6;
+      // Satellite Nodes orbiting
+      satNodes.forEach((node) => {
+        node.angle += node.speed * 0.015;
+        node.mesh.position.x = node.radius * Math.cos(node.angle);
+        node.mesh.position.z = node.radius * Math.sin(node.angle);
+        node.mesh.position.y = Math.sin(node.angle * 2 + node.tilt) * 0.7;
+        node.mesh.rotation.y = elapsed;
+        node.mesh.rotation.x = elapsed * 0.5;
       });
 
-      // Swirling Particle System
-      const positions = particleSystem.geometry.attributes.position.array;
+      // Binary particle stream rising
+      const pos = particleSystem.geometry.attributes.position.array;
       for (let i = 0; i < particleCount; i++) {
-        particleAngles[i] += 0.003 + (i % 3) * 0.001;
-        const r = particleRadii[i];
-        const a = particleAngles[i];
-        positions[i * 3] = r * Math.cos(a);
-        positions[i * 3 + 2] = r * Math.sin(a);
-        positions[i * 3 + 1] = particleY[i] + Math.sin(elapsed + r) * 0.15;
+        pos[i * 3 + 1] += particleVelY[i];
+        if (pos[i * 3 + 1] > 2.5) {
+          pos[i * 3 + 1] = -2.5;
+          pos[i * 3] = (Math.random() - 0.5) * 5.0;
+          pos[i * 3 + 2] = (Math.random() - 0.5) * 5.0;
+        }
       }
       particleSystem.geometry.attributes.position.needsUpdate = true;
 
-      // Floating bobbing motion
-      mainGroup.position.y = Math.sin(elapsed * 1.4) * 0.14;
-
-      // Parallax smooth interpolation
-      targetRotY = mouseX * 0.5;
-      targetRotX = mouseY * 0.5;
+      // Parallax smooth mouse tilt
+      targetRotY = mouseX * 0.45;
+      targetRotX = mouseY * 0.35;
       mainGroup.rotation.y += (targetRotY - mainGroup.rotation.y) * 0.03;
       mainGroup.rotation.x += (targetRotX - mainGroup.rotation.x) * 0.03;
 
-      // Scale interpolation on hover
-      mainGroup.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.08);
-
-      // Light movement
-      cyanLight.position.x = Math.sin(elapsed * 2) * 4;
-      cyanLight.position.y = Math.cos(elapsed * 1.5) * 4;
+      // Light animation
+      cyanLight.position.x = Math.sin(elapsed * 1.8) * 3;
 
       renderer.render(scene, camera);
     };
@@ -379,14 +526,12 @@ export default function Avatar3D() {
     animate();
 
     // ----------------------------------------------------
-    // 10. Cleanup
+    // 8. Cleanup
     // ----------------------------------------------------
     return () => {
       domElement.removeEventListener("mousedown", onMouseDown);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseup", onMouseUp);
-      domElement.removeEventListener("mouseenter", onMouseEnter);
-      domElement.removeEventListener("mouseleave", onMouseLeave);
 
       domElement.removeEventListener("touchstart", onTouchStart);
       domElement.removeEventListener("touchmove", onTouchMove);
@@ -399,17 +544,22 @@ export default function Avatar3D() {
         container.removeChild(renderer.domElement);
       }
 
-      // Dispose
-      crystalGeo.dispose();
-      crystalMat.dispose();
-      cageGeo.dispose();
-      cageMat.dispose();
-      pulseGeo.dispose();
-      pulseMat.dispose();
-      ring1Geo.dispose();
-      ring1Mat.dispose();
-      ring2Geo.dispose();
-      ring2Mat.dispose();
+      // Dispose resources
+      baseGeo.dispose();
+      baseMat.dispose();
+      kbGeo.dispose();
+      kbMat.dispose();
+      kbLinesGeo.dispose();
+      kbLinesMat.dispose();
+      padGeo.dispose();
+      padMat.dispose();
+      lidBackGeo.dispose();
+      lidBackMat.dispose();
+      logoGeo.dispose();
+      logoMat.dispose();
+      screenGeo.dispose();
+      screenMat.dispose();
+      screenTexture.dispose();
       particleGeo.dispose();
       particleMat.dispose();
       renderer.dispose();
@@ -418,17 +568,13 @@ export default function Avatar3D() {
 
   return (
     <div className="relative w-full h-full flex items-center justify-center select-none">
-      {/* Visual Instruction Badge for Recruiters */}
-      <div className="absolute top-2 right-4 z-20 pointer-events-none text-xs font-mono tracking-widest text-blue-300/80 bg-blue-950/40 backdrop-blur-md border border-blue-500/30 px-3 py-1.5 rounded-full flex items-center gap-2 shadow-lg">
-        <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
-        <span>3D INTERACTIVE • DRAG TO ROTATE</span>
-      </div>
+      {/* Visual Instruction Badge */}
+
 
       <div
         ref={mountRef}
-        className={`w-full h-full min-h-[480px] lg:min-h-[550px] flex items-center justify-center transition-cursor duration-200 ${
-          isDragging ? "cursor-grabbing" : "cursor-grab"
-        }`}
+        className={`w-full h-full min-h-[480px] lg:min-h-[550px] flex items-center justify-center transition-cursor duration-200 ${isDragging ? "cursor-grabbing" : "cursor-grab"
+          }`}
       />
     </div>
   );
