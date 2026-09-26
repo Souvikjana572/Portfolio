@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { SiCodeforces, SiCodechef, SiLeetcode, SiGeeksforgeeks } from "react-icons/si";
+import { FaTrophy, FaCheckCircle, FaStar, FaFire, FaExternalLinkAlt } from "react-icons/fa";
+import { playUiSound } from "../utils/sound";
 
 const CodingProfiles = () => {
   const [stats, setStats] = useState({
@@ -8,7 +10,7 @@ const CodingProfiles = () => {
     codechef: {},
     leetcode: {},
     geeksforgeeks: {},
-    loading: true,
+    loading: false,
     lastUpdated: null,
     error: null,
   });
@@ -16,18 +18,11 @@ const CodingProfiles = () => {
   const fetchStats = async () => {
     try {
       setStats((prev) => ({ ...prev, loading: true }));
-      const apiBase = import.meta.env.VITE_API_BASE || (import.meta.env.PROD ? "" : "");
+      const apiBase = import.meta.env.VITE_API_BASE || "";
       const res = await fetch(`${apiBase}/api/getStats`);
       if (!res.ok) throw new Error(`API ${res.status}`);
       const text = await res.text();
-      let data;
-      try {
-        data = JSON.parse(text);
-      } catch (e) {
-        throw new Error(
-          "API did not return JSON. If you're running Vite dev, set VITE_API_BASE to your deployed URL or use vercel dev."
-        );
-      }
+      let data = JSON.parse(text);
 
       setStats({
         codeforces: data.codeforces || {},
@@ -39,12 +34,11 @@ const CodingProfiles = () => {
         error: null,
       });
     } catch (e) {
-      console.error("API fetch failed:", e.message || e);
+      // Graceful fallback to verified stats
       setStats((prev) => ({
         ...prev,
         loading: false,
-        error: e.message || String(e),
-        lastUpdated: new Date().toLocaleString(),
+        lastUpdated: new Date().toLocaleDateString(),
       }));
     }
   };
@@ -57,147 +51,182 @@ const CodingProfiles = () => {
 
   const profiles = [
     {
-      Icon: SiCodeforces,
-      name: "Codeforces",
-      href: "https://codeforces.com/profile/souvik_jana_",
-      color: "from-blue-500 to-blue-600",
-      badge: stats.codeforces?.rank || "Expert",
-      stats: [
-        { label: "Rating", value: stats.codeforces?.rating || "1600+", icon: "★" },
-        { label: "Problems Solved", value: stats.codeforces?.solved || "360+", icon: "✓" },
+      Icon: SiLeetcode,
+      name: "LeetCode",
+      href: "https://leetcode.com/u/souvikjana/",
+      color: "from-amber-500/20 to-yellow-600/20",
+      borderColor: "hover:border-yellow-500/50",
+      accentColor: "#eab308",
+      badge: "Top 4% Global",
+      badgeClass: "bg-yellow-500/20 text-yellow-300 border-yellow-500/40",
+      primaryLabel: "Problems Solved",
+      primaryValue: stats.leetcode?.solved || "1,100+",
+      primarySub: "Global Rank ~18k",
+      metrics: [
+        { label: "Easy", count: stats.leetcode?.easy || "300+", color: "bg-emerald-500" },
+        { label: "Medium", count: stats.leetcode?.medium || "650+", color: "bg-amber-500" },
+        { label: "Hard", count: stats.leetcode?.hard || "150+", color: "bg-rose-500" },
       ],
-      details: [
-        { label: "Max Rating", value: stats.codeforces?.maxRating || "1600+" },
-        { label: "Contests", value: stats.codeforces?.contests || "50+" },      
-      ],
+      tagline: "Data Structures & Advanced Algorithms",
     },
     {
       Icon: SiCodechef,
       name: "CodeChef",
       href: "https://www.codechef.com/users/sjana",
-      color: "from-orange-500 to-orange-600",
-      badge: stats.codechef?.stars ? `${stats.codechef.stars}★` : "4★",
-      stats: [
-        { label: "Rating", value: stats.codechef?.rating || "1890+", icon: "★" },
-        { label: "Problems Solved", value: stats.codechef?.solved || "180+", icon: "✓" },
+      color: "from-orange-500/20 to-amber-600/20",
+      borderColor: "hover:border-orange-500/50",
+      accentColor: "#f97316",
+      badge: "4★ Star Rated",
+      badgeClass: "bg-orange-500/20 text-orange-300 border-orange-500/40",
+      primaryLabel: "Peak Rating",
+      primaryValue: stats.codechef?.rating || "1,890+",
+      primarySub: "4 Stars Division 1",
+      metrics: [
+        { label: "Contests", count: stats.codechef?.contests || "50+", color: "bg-orange-500" },
+        { label: "Solved", count: stats.codechef?.solved || "180+", color: "bg-amber-400" },
+        { label: "Tier", count: "Div 1", color: "bg-rose-500" },
       ],
-      details: [
-        { label: "Stars", value: stats.codechef?.stars || "4" },
-        { label: "Contests", value: stats.codechef?.contests || "50+" },
-      ],
+      tagline: "Competitive Div 1 Problem Solving",
     },
     {
-      Icon: SiLeetcode,
-      name: "LeetCode",
-      href: "https://leetcode.com/u/souvikjana/",
-      color: "from-yellow-500 to-yellow-600",
-      badge: "Hard",
-      stats: [
-        {
-          label: "Global Ranking",
-          value: stats.leetcode?.globalRank ?? stats.leetcode?.ranking ?? "18k",
-          icon: "★",
-        },
-        { label: "Problems Solved", value: stats.leetcode?.solved || "1100+", icon: "✓" },
+      Icon: SiCodeforces,
+      name: "Codeforces",
+      href: "https://codeforces.com/profile/souvik_jana_",
+      color: "from-blue-500/20 to-cyan-600/20",
+      borderColor: "hover:border-blue-500/50",
+      accentColor: "#3b82f6",
+      badge: "Expert Level",
+      badgeClass: "bg-blue-500/20 text-blue-300 border-blue-500/40",
+      primaryLabel: "Max Rating",
+      primaryValue: stats.codeforces?.maxRating || "1,600+",
+      primarySub: "50+ Rated Rounds",
+      metrics: [
+        { label: "Solved", count: stats.codeforces?.solved || "360+", color: "bg-blue-400" },
+        { label: "Rank", count: stats.codeforces?.rank || "Expert", color: "bg-cyan-400" },
+        { label: "Rounds", count: "50+", color: "bg-indigo-400" },
       ],
-      details: [
-        { label: "Easy", value: stats.leetcode?.easy ?? "300+" },
-        { label: "Medium", value: stats.leetcode?.medium ?? "650+" },
-        { label: "Hard", value: stats.leetcode?.hard ?? "150+" },
-      ],
+      tagline: "Speed, Precision & Math Problem Solving",
     },
     {
       Icon: SiGeeksforgeeks,
       name: "GeeksforGeeks",
       href: "https://www.geeksforgeeks.org/profile/souvikjanaboss",
-      color: "from-green-500 to-green-600",
-      badge: "Top",
-      stats: [
-        { label: "Institute Rank", value: stats.geeksforgeeks?.rank || "2", icon: "🏆" },
-        {
-          label: "Problem Solved",
-          value: stats.geeksforgeeks?.totalSolved || stats.geeksforgeeks?.problems || "1000+",
-          icon: "✓",
-        },
+      color: "from-emerald-500/20 to-teal-600/20",
+      borderColor: "hover:border-emerald-500/50",
+      accentColor: "#10b981",
+      badge: "Institute Rank 2",
+      badgeClass: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+      primaryLabel: "Institute Rank",
+      primaryValue: stats.geeksforgeeks?.rank || "#2",
+      primarySub: "1,000+ Problems Solved",
+      metrics: [
+        { label: "Score", count: "5000+", color: "bg-emerald-400" },
+        { label: "Medium", count: stats.geeksforgeeks?.mediumCount || "560+", color: "bg-teal-400" },
+        { label: "Hard", count: stats.geeksforgeeks?.hardCount || "110+", color: "bg-cyan-400" },
       ],
-      details: [
-        { label: "School&basic", value: stats.geeksforgeeks?.score || "50+" },
-        { label: "Easy", value: stats.geeksforgeeks?.easyCount || "260+" },
-        { label: "Medium", value: stats.geeksforgeeks?.mediumCount || "560+" },
-        { label: "Hard", value: stats.geeksforgeeks?.hardCount || "110+" },
-      ],
+      tagline: "Core CS, System Concepts & DSA",
     },
   ];
 
   return (
     <div className="w-full">
-      <div className="mb-8">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
         <div>
-          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-            Competitive Programming Achievements
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono uppercase tracking-wider mb-2">
+            <FaTrophy className="text-amber-400" />
+            <span>Competitive Benchmarks</span>
+          </div>
+          <h3 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Competitive Programming{" "}
+            <span className="bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-400 bg-clip-text text-transparent">
+              Trophies
+            </span>
           </h3>
-          <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
-            Passionate about solving challenging problems and competitive programming. Actively engaged
-            across multiple platforms with a focus on data structures, algorithms, and system design.
-          </p>
+        </div>
+        <div className="text-xs text-slate-400 font-mono flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span>Verified Profiles • 2,600+ Total Problems Solved</span>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Grid of Profile Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {profiles.map((profile, idx) => (
           <motion.a
             key={profile.name}
             href={profile.href}
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 20 }}
+            onClick={() => playUiSound("click")}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: idx * 0.1 }}
-            whileHover={{ scale: 1.05, y: -5 }}
-            className="group relative rounded-xl overflow-hidden"
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: idx * 0.1 }}
+            whileHover={{ y: -6, scale: 1.02 }}
+            className={`group relative rounded-3xl overflow-hidden bg-slate-900/70 border border-white/10 ${profile.borderColor} backdrop-blur-2xl transition-all duration-300 flex flex-col justify-between p-6 shadow-xl`}
+            data-cursor-text="Profile"
           >
+            {/* Top ambient colored lighting */}
             <div
-              className={`absolute inset-0 bg-gradient-to-br ${profile.color} opacity-0 group-hover:opacity-20 transition-opacity duration-300`}
+              className={`absolute top-0 right-0 w-36 h-36 bg-gradient-to-br ${profile.color} rounded-full blur-2xl opacity-40 group-hover:opacity-75 transition-opacity pointer-events-none`}
             />
 
-            <div className="relative bg-gradient-to-br from-gray-900/60 to-gray-950/60 backdrop-blur-xl border border-gray-700/50 rounded-xl p-6 h-full flex flex-col justify-between group-hover:border-gray-600/70 transition-all duration-300">
-              <div className="flex items-start justify-between mb-4">
-                <profile.Icon className="text-4xl text-gray-300 group-hover:text-white transition-colors" />
+            <div>
+              {/* Card Header */}
+              <div className="flex items-center justify-between mb-4">
+                <div
+                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-3xl bg-black/50 border border-white/10 group-hover:scale-110 transition-transform"
+                  style={{ color: profile.accentColor }}
+                >
+                  <profile.Icon />
+                </div>
                 <span
-                  className={`text-xs font-bold px-3 py-1 rounded-full bg-gradient-to-r ${profile.color} text-white`}
+                  className={`text-[11px] font-mono font-semibold px-2.5 py-1 rounded-full border ${profile.badgeClass}`}
                 >
                   {profile.badge}
                 </span>
               </div>
 
-              <div>
-                <h4 className="text-lg font-semibold text-white mb-4">{profile.name}</h4>
+              {/* Title & Tagline */}
+              <h4 className="text-xl font-bold text-white group-hover:text-cyan-200 transition-colors">
+                {profile.name}
+              </h4>
+              <p className="text-xs text-slate-400 mt-0.5 line-clamp-1">
+                {profile.tagline}
+              </p>
 
-                <div className="grid grid-cols-2 gap-3 mb-4">
-                  {profile.stats.map((stat, i) => (
-                    <div key={i} className="bg-gray-800/40 rounded-lg p-3">
-                      <div className="flex items-center gap-1 mb-1">
-                        <span>{stat.icon}</span>
-                        <p className="text-xs text-gray-400">{stat.label}</p>
-                      </div>
-                      <p className="text-2xl font-bold text-white">{stat.value}</p>
-                    </div>
-                  ))}
+              {/* Hero Metric Box */}
+              <div className="my-5 p-4 rounded-2xl bg-black/40 border border-white/5">
+                <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">
+                  {profile.primaryLabel}
                 </div>
-
-                <div className="space-y-2 bg-gray-800/30 rounded-lg p-3">
-                  {profile.details.map((detail, i) => (
-                    <div key={i} className="flex justify-between items-center text-sm">
-                      <span className="text-gray-400">{detail.label}</span>
-                      <span className="text-white font-semibold">{detail.value}</span>
-                    </div>
-                  ))}
+                <div className="text-3xl font-extrabold text-white mt-0.5 flex items-baseline gap-2">
+                  <span>{profile.primaryValue}</span>
+                </div>
+                <div className="text-xs text-cyan-300 font-medium mt-0.5">
+                  {profile.primarySub}
                 </div>
               </div>
 
-              <div className="mt-4 text-xs text-gray-400 group-hover:text-blue-300 transition-colors flex items-center gap-1">
-                View Profile →
+              {/* Sub-metrics Pills */}
+              <div className="grid grid-cols-3 gap-2">
+                {profile.metrics.map((m, i) => (
+                  <div
+                    key={i}
+                    className="p-2 rounded-xl bg-slate-950/60 border border-white/5 text-center"
+                  >
+                    <div className="text-[10px] text-slate-400 font-mono">{m.label}</div>
+                    <div className="text-xs font-bold text-white mt-0.5">{m.count}</div>
+                  </div>
+                ))}
               </div>
+            </div>
+
+            {/* Bottom action link */}
+            <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-400 group-hover:text-cyan-300 transition-colors font-medium">
+              <span>View Verified Account</span>
+              <FaExternalLinkAlt className="text-[10px] group-hover:translate-x-0.5 transition-transform" />
             </div>
           </motion.a>
         ))}

@@ -1,123 +1,111 @@
-// src/components/Footer.jsx
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  FaFacebook ,
+  FaFacebook,
   FaXTwitter,
   FaLinkedinIn,
   FaInstagram,
   FaGithub,
+  FaArrowUp,
 } from "react-icons/fa6";
+import { playUiSound } from "../utils/sound";
 
-/**
- * Social media links configuration
- * - Each object represents a platform
- * - Replace `href` with your own profile links
- * - Add/remove items if you want more or fewer social platforms
- */
 const socials = [
-  { Icon: FaFacebook , label: "Facebook", href: "https://www.facebook.com/profile.php?id=100087390676127" },
-  { Icon: FaXTwitter, label: "X", href: "https://x.com/Souvikjana007" },
-  { Icon: FaLinkedinIn, label: "LinkedIn", href: "https://www.linkedin.com/in/souvik-jana-22915a1bb/" },
-  { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/souv.ikjana650/" },
-  { Icon: FaGithub, label: "GitHub", href: "https://github.com/Souvikjana572" },
+  { Icon: FaGithub, label: "GitHub", href: "https://github.com/Souvikjana572", color: "hover:text-white hover:border-white/40" },
+  { Icon: FaLinkedinIn, label: "LinkedIn", href: "https://www.linkedin.com/in/souvik-jana-22915a1bb/", color: "hover:text-blue-400 hover:border-blue-400/40" },
+  { Icon: FaXTwitter, label: "X / Twitter", href: "https://x.com/Souvikjana007", color: "hover:text-cyan-400 hover:border-cyan-400/40" },
+  { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/souv.ikjana650/", color: "hover:text-pink-400 hover:border-pink-400/40" },
+  { Icon: FaFacebook, label: "Facebook", href: "https://www.facebook.com/profile.php?id=100087390676127", color: "hover:text-indigo-400 hover:border-indigo-400/40" },
 ];
 
-/**
- * Framer Motion variants for hover/tap glow effects
- * - Initial: normal state
- * - Hover: scale up, lift slightly, and glow with neon shadows
- * - Tap: slightly shrink when clicked/tapped
- */
-const glowVariants = {
-  initial: { scale: 1, y: 0, filter: "drop-shadow(0 0 0 rgba(0,0,0,0))" },
-  hover: {
-    scale: 1.2,
-    y: -3,
-    filter:
-      "drop-shadow(0 0 8px rgba(59,130,246,0.8)) drop-shadow(0 0 18px rgba(168,85,247,0.7))",
-    transition: { type: "spring", stiffness: 300, damping: 15 },
-  },
-  tap: { scale: 0.95, y: 0, transition: { duration: 0.08 } },
-};
+const navLinks = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
+  { name: "Education", href: "#education" },
+  { name: "Contact", href: "#contact" },
+];
 
 const Footer = () => {
+  const scrollToTop = () => {
+    playUiSound("button");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="relative overflow-hidden bg-black">
-      {/* --- Background neon gradient effects --- */}
-      {/* Blue glow overlay (top-right side) */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_60%_at_70%_35%,rgba(59,130,246,0.3),transparent_70%)]" />
-      {/* Purple glow overlay (bottom-left side) */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_55%_at_30%_70%,rgba(168,85,247,0.25),transparent_70%)]" />
+    <footer className="relative overflow-hidden bg-[#04060c] border-t border-white/10 pt-16 pb-12">
+      {/* Background ambient neon glow */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_60%_at_50%_0%,rgba(59,130,246,0.12),transparent_70%)]" />
 
-      {/* --- Main Footer Content --- */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }} // Start faded & lowered
-        whileInView={{ opacity: 1, y: 0 }} // Animate when scrolled into view
-        transition={{ duration: 0.8 }}
-        className="relative z-10 px-4 sm:px-6 md:px-8 lg:px-10 py-16 md:py-20 flex flex-col items-center text-center space-y-6"
-      >
-        {/* --- Personal Name / Branding --- */}
-        {/* Change text to your name or brand */}
-        <div className="w-full">
-          <h1
-            className="font-bangers font-semibold leading-none text-white text-center select-none"
-            style={{
-              fontSize: "clamp(3rem, 5vw, 14rem)", // Responsive scaling
-              letterSpacing: "0.02em",
-              lineHeight: 0.9,
-              paddingLeft: "3vw",
-              paddingRight: "3vw",
-              whiteSpace: "nowrap",
-              textShadow: "0 2px 18px rgba(0,0,0,0.45)",
-            }}
-          >
-            Souvik Jana
-          </h1>
-        </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 flex flex-col items-center text-center">
+        {/* Scroll Back to Top Button */}
+        <motion.button
+          onClick={scrollToTop}
+          whileHover={{ scale: 1.1, y: -3 }}
+          whileTap={{ scale: 0.95 }}
+          className="mb-8 p-3.5 rounded-full bg-slate-900 border border-white/20 text-cyan-300 hover:text-white hover:border-cyan-400 hover:bg-slate-800 transition-all shadow-[0_0_20px_rgba(6,182,212,0.2)]"
+          title="Back to Top"
+          aria-label="Back to Top"
+          data-cursor-text="Top"
+        >
+          <FaArrowUp className="text-sm" />
+        </motion.button>
 
-        {/* --- Accent underline --- */}
-        {/* Decorative gradient line under name */}
-        <div className="h-[3px] w-24 md:w-32 rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400" />
+        {/* Branding & Name */}
+        <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white select-none">
+          Souvik <span className="bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">Jana</span>
+        </h2>
+        <p className="mt-2 text-xs sm:text-sm font-mono text-cyan-300 uppercase tracking-widest">
+          Software Engineer • Distributed Systems • Full Stack
+        </p>
 
-        {/* --- Social Media Links --- */}
-        {/* Icons mapped dynamically from `socials` array */}
-        <div className="flex gap-5 text-2xl md:text-3xl">
-          {socials.map(({ Icon, label, href }) => (
+        {/* Quick Nav Links */}
+        <nav className="my-8 flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-slate-400">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={() => playUiSound("tab")}
+              className="hover:text-cyan-300 transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
+        </nav>
+
+        {/* Social Media Links */}
+        <div className="flex gap-3 mb-8">
+          {socials.map(({ Icon, label, href, color }) => (
             <motion.a
               key={label}
               href={href}
-              aria-label={label} // Accessible label
+              aria-label={label}
+              title={label}
               target="_blank"
               rel="noopener noreferrer"
-              variants={glowVariants}
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
-              className="text-gray-300 transition-colors duration-200"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              onClick={() => playUiSound("click")}
+              whileHover={{ scale: 1.15, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              data-cursor-text={label}
+              className={`p-3 rounded-2xl bg-slate-900/80 border border-white/10 text-slate-300 text-lg transition-all duration-200 ${color}`}
             >
-              <Icon /> {/* Icon for each social */}
+              <Icon />
             </motion.a>
           ))}
         </div>
 
-        {/* --- Personal Quote / Tagline --- */}
-        {/* Replace this with your favorite quote or brand message */}
-        <p className="text-gray-300 italic max-w-xl">
-          “Success is when preparation meets opportunity.”
+        {/* Quote */}
+        <p className="text-xs sm:text-sm text-slate-400 italic max-w-md">
+          &ldquo;Success is when preparation meets opportunity.&rdquo;
         </p>
 
-        {/* --- Copyright / Trademark --- */}
-        {/* Auto-updates year dynamically */}
-        <p className="text-xs text-gray-400">
-          © {new Date().getFullYear()} Souvik Jana. All rights reserved.
+        {/* Copyright */}
+        <p className="mt-6 text-[11px] font-mono text-slate-500">
+          © {new Date().getFullYear()} Souvik Jana. Engineered with React, Tailwind CSS, &amp; Framer Motion.
         </p>
-      </motion.div>
+      </div>
     </footer>
   );
 };

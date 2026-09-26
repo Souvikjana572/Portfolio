@@ -2,122 +2,147 @@ import { motion } from "framer-motion";
 import p from "../assets/Souvik1.jpg";
 import ParticleBackground from "../components/Particlesbackground";
 import CodingProfiles from "../components/CodingProfiles";
+import { FaGraduationCap, FaBriefcase, FaCode, FaCloud, FaDownload } from "react-icons/fa";
+import resumePdf from "../assets/Resume.pdf";
+import { playUiSound } from "../utils/sound";
 
 export default function About() {
   return (
     <section
       id="about"
-      className="min-h-screen w-full flex items-center justify-center relative bg-black text-white overflow-hidden"
-      aria-label="About me"
+      className="min-h-screen w-full relative bg-[#05070f] text-white py-24 overflow-hidden"
+      aria-label="About Souvik Jana"
     >
       <ParticleBackground />
-      {/* Layered neon background accents */}
-      <motion.div className="absolute inset-0 pointer-events-none">
-        <motion.div 
-          className="absolute -top-10 -left-10 w-[360px] h-[360px] rounded-full bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-blue-400/20 opacity-25 blur-[120px] animate-pulse"
-          animate={{ y: [0, 30, 0], x: [0, 20, 0] }}
-          transition={{ duration: 10, repeat: Infinity }}
-        />
-        <motion.div 
-          className="absolute bottom-0 right-10 w-[420px] h-[420px] rounded-full bg-gradient-to-r from-purple-500/30 via-blue-500/30 to-purple-400/20 opacity-20 blur-[140px] animate-pulse delay-300"
-          animate={{ y: [0, -30, 0], x: [0, -20, 0] }}
-          transition={{ duration: 12, repeat: Infinity }}
-        />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-20 w-[220px] h-[220px] rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-15 blur-[100px]" />
-      </motion.div>
 
-      {/* Content container */}
-      <div className="relative z-10 max-w-6xl w-full mx-auto px-6 md:px-10 lg:px-12 py-20 flex flex-col gap-12">
-        
-        {/* Profile header */}
+      {/* Cyber Grid */}
+      <div className="absolute inset-0 cyber-grid opacity-25 pointer-events-none" />
+
+      {/* Ambient background light orbs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
-          className="flex flex-col md:flex-row items-center md:items-stretch gap-8"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, amount: 0.4 }}
-        >
-          {/* Avatar / Card */}
-          <motion.div
-            className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-xl border border-blue-400/40 group"
-             whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 200, damping: 18 }}
-            aria-hidden="true"
-          >
-            <div className="absolute inset-0 " />
-            <img 
-              src={p} 
-              alt="Souvik Jana" 
-            />
-          </motion.div>
+          className="absolute -top-10 -left-10 w-[420px] h-[420px] rounded-full bg-gradient-to-r from-blue-600/20 via-cyan-500/15 to-transparent blur-[140px]"
+          animate={{ y: [0, 30, 0], x: [0, 20, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-10 right-10 w-[480px] h-[480px] rounded-full bg-gradient-to-r from-purple-600/20 via-pink-500/15 to-transparent blur-[150px]"
+          animate={{ y: [0, -30, 0], x: [0, -20, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
 
-          {/* Name + Role + Bio + CTAs */}
-          <div className="flex-1 flex flex-col justify-center text-center md:text-left">
-            <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-blue-300">
-              Souvik Jana
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 flex flex-col gap-16">
+        {/* Top Profile Card Container */}
+        <motion.div
+          className="relative rounded-3xl p-6 sm:p-10 lg:p-12 bg-slate-900/60 border border-white/10 backdrop-blur-2xl shadow-2xl flex flex-col lg:flex-row items-center gap-10 lg:gap-14"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* Subtle top edge neon line */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
+
+          {/* Left Avatar / Photo Frame */}
+          <div className="relative group shrink-0">
+            {/* Ambient halo behind photo */}
+            <div className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 opacity-30 blur-xl group-hover:opacity-60 transition-opacity duration-500" />
+
+            <div className="relative w-52 h-52 sm:w-64 sm:h-64 rounded-3xl overflow-hidden border-2 border-white/20 bg-slate-950 shadow-2xl">
+              <img
+                src={p}
+                alt="Souvik Jana"
+                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+              {/* Verified badge */}
+              <div className="absolute bottom-3 left-3 right-3 px-3 py-1.5 rounded-xl bg-slate-950/80 border border-white/15 backdrop-blur-md flex items-center justify-between text-[11px] font-mono">
+                <span className="text-cyan-300 font-semibold">@souvikjana</span>
+                <span className="text-emerald-400 flex items-center gap-1">● Active</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Bio & Info */}
+          <div className="flex-1 flex flex-col justify-center text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-mono uppercase tracking-wider mb-3 mx-auto lg:mx-0 w-fit">
+              About Me
+            </div>
+
+            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
+              Engineering with{" "}
+              <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Precision &amp; Scale
+              </span>
             </h2>
-            <p className="mt-2 text-lg sm:text-xl text-white/90 font-semibold">
-              Software Developer
+
+            <p className="mt-4 text-slate-300 leading-relaxed text-sm sm:text-base">
+              I&apos;m <span className="text-white font-semibold">Souvik Jana</span>, a Software Engineer dedicated to architecting scalable distributed systems and turning difficult algorithmic problems into clean, robust production services.
             </p>
 
-            <p className="mt-4 text-gray-300 leading-relaxed text-base sm:text-lg max-w-2xl md:max-w-3xl">
-            I'm Souvik, a Software Engineer passionate about building scalable systems and solving complex problems. I have hands-on experience working on large-scale cloud infrastructure and multi-region service migrations during my time at Amazon. With a strong foundation in algorithms and software engineering principles, I enjoy designing efficient solutions, optimizing systems, and continuously learning emerging technologies in cloud computing and AI.
-.</p>
+            <p className="mt-3 text-slate-300 leading-relaxed text-sm sm:text-base">
+              Having contributed to <span className="text-cyan-300 font-semibold">Amazon</span> logistics backend migrations across multiple geographic regions with zero downtime, I understand what it takes to build software that handles real production load. When I&apos;m not writing code, I love competing in algorithmic contests on LeetCode and CodeChef.
+            </p>
 
-            {/* Quick stats */}
-            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-xl">
+            {/* Quick Spec Pills */}
+            <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
-                { label: "Experience", value: "Fresher" },
-                { label: "Specialty", value: "Full Stack" },
-                { label: "Focus", value: "Software " },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="rounded-xl border border-blue-400/30 bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-xl px-4 py-3 text-center hover:border-blue-400/60 hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-500/20 transition-all duration-300"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.05 * i }}
-                  viewport={{ once: true, amount: 0.3 }}
-                >
-                  <div className="text-sm text-blue-300 font-medium">{item.label}</div>
-                  <div className="text-base font-semibold text-white mt-1">
-                    {item.value}
+                { icon: FaBriefcase, label: "Experience", value: "Amazon (HYD13)" },
+                { icon: FaCode, label: "Core Stack", value: "Java • React • Node" },
+                { icon: FaCloud, label: "Infrastructure", value: "AWS CDK • Cloud" },
+                { icon: FaGraduationCap, label: "Academics", value: "8.50 CGPA B.Tech" },
+              ].map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={i}
+                    className="p-3 rounded-2xl bg-black/40 border border-white/5 text-left hover:border-cyan-500/30 transition-colors"
+                  >
+                    <Icon className="text-cyan-400 text-sm mb-1.5" />
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                      {item.label}
+                    </div>
+                    <div className="text-xs sm:text-sm font-bold text-white mt-0.5">
+                      {item.value}
+                    </div>
                   </div>
-                </motion.div>
-              ))}
+                );
+              })}
             </div>
 
             {/* CTAs */}
-            <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
-              <motion.a
-                href="#projects"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold px-6 py-3 shadow-lg hover:shadow-xl transition-all"
-                aria-label="View my projects"
+            <div className="mt-7 flex flex-wrap gap-3.5 justify-center lg:justify-start">
+              <a
+                href={resumePdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => playUiSound("click")}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold text-xs sm:text-sm shadow-lg hover:shadow-blue-500/25 transition-all"
+                data-cursor-text="Resume"
               >
-                View Projects
-              </motion.a>
-              <motion.a
+                <FaDownload className="text-xs" />
+                <span>Download Resume (PDF)</span>
+              </a>
+              <a
                 href="#contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center rounded-lg border border-blue-400/50 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-md text-white px-6 py-3 hover:border-blue-400 hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 transition-all"
-                aria-label="Get in touch"
+                onClick={() => playUiSound("click")}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 border border-white/20 text-white font-semibold text-xs sm:text-sm hover:border-cyan-400/50 hover:bg-slate-800 transition-all"
+                data-cursor-text="Contact"
               >
-                Get in Touch
-              </motion.a>
+                <span>Get In Touch</span>
+              </a>
             </div>
           </div>
         </motion.div>
 
-        {/* Coding Profiles Section */}
+        {/* Coding Profiles Trophy Showcase */}
         <motion.div
-          className="w-full mt-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true, amount: 0.3 }}
         >
           <CodingProfiles />
         </motion.div>
