@@ -10,7 +10,7 @@ import { playUiSound } from "../utils/sound";
 
 const experiences = [
   {
-    role: "Programmer/Analyst Intern",
+    role: "Programmer/Analyst",
     company: "Amazon",
     duration: "July - Dec 2025",
     startLabel: "July 2025",
@@ -122,8 +122,8 @@ function TimelineDateMarker({ label, dateTime, position, isLeft, isMobile }) {
   const labelPosition = isMobile
     ? "left-8"
     : isLeft
-    ? "left-8"
-    : "right-8";
+      ? "left-8"
+      : "right-8";
 
   return (
     <motion.div
@@ -131,9 +131,8 @@ function TimelineDateMarker({ label, dateTime, position, isLeft, isMobile }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35 }}
       viewport={{ once: true, amount: 0.55 }}
-      className={`absolute left-4 z-30 -translate-x-1/2 md:left-1/2 ${
-        position === "top" ? "top-0" : "bottom-0"
-      }`}
+      className={`absolute left-4 z-30 -translate-x-1/2 md:left-1/2 ${position === "top" ? "top-0" : "bottom-0"
+        }`}
     >
       <time
         dateTime={dateTime}
@@ -150,8 +149,8 @@ function TimelineItem({ experience, index, isMobile }) {
   const alignment = isMobile
     ? "ml-10 pl-4"
     : isLeft
-    ? "md:mr-[calc(50%+2.5rem)] md:pr-4"
-    : "md:ml-[calc(50%+2.5rem)] md:pl-4";
+      ? "md:mr-[calc(50%+2.5rem)] md:pr-4"
+      : "md:ml-[calc(50%+2.5rem)] md:pl-4";
 
   return (
     <div className="relative min-h-[340px] md:min-h-[380px]">
@@ -346,7 +345,7 @@ const Experience = () => {
         <div ref={timelineRef} className="relative">
           {/* Base timeline rail */}
           <div className="absolute bottom-0 left-4 top-0 w-0.5 -translate-x-1/2 bg-slate-800 md:left-1/2" />
-          
+
           {/* Active glowing laser timeline */}
           <motion.div
             style={{ scaleY: lineScale }}
